@@ -56,13 +56,21 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="RepositorioBaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{216C27AC-662F-4153-AAB9-46DD025AE3D0}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{D0047221-D480-4B84-B7FB-EA230124BFD5}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProyectoFinalA2\ProyectoFinalA2.csproj">
       <Project>{F79E3194-DBD5-4053-AC25-85753A3F67A0}</Project>
       <Name>ProyectoFinalA2</Name>
