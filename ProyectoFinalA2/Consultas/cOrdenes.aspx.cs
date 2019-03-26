@@ -38,14 +38,14 @@ namespace ProyectoFinalA2.Consultas
                         id = Convert.ToInt32(FiltroTextBox.Text);
                         filtro = c => c.OrdenId == id;
                         break;
-                    case 2://FechaOrden
-                        id = Convert.ToInt32(FiltroTextBox.Text);
-                        filtro = c => c.FechaOrden == id;
-                        break;
-                    case 3://Total
-                        id = Convert.ToInt32(FiltroTextBox.Text);
-                        filtro = c => c.Total == id;
-                        break;
+                    //case 2://FechaOrden
+                    //    id = Convert.ToInt32(FiltroTextBox.Text);
+                    //    filtro = c => c.FechaOrden == id;
+                    //    break;
+                    //case 3://Total
+                    //    id = Convert.ToInt32(FiltroTextBox.Text);
+                    //    filtro = c => c.Total == id;
+                    //    break;
                 }
 
                 DatosGridView.DataSource = repositorio.GetList(filtro);

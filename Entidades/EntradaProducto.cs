@@ -11,7 +11,7 @@ namespace Entidades
     public class EntradaProducto
     {
         [Key]
-        public int OrdenId { get; set; }
+        public int EntradaId { get; set; }
         public DateTime Fecha { get; set; }
         public int Cantidad { get; set; }
         public int ProductoId { get; set; }
@@ -19,7 +19,7 @@ namespace Entidades
 
         public EntradaProducto()
         {
-            OrdenId = 0;
+            EntradaId = 0;
             Fecha = DateTime.Now;
             Cantidad = 0;
             ProductoId = 0;
@@ -27,7 +27,7 @@ namespace Entidades
 
         public EntradaProducto(int entradaId, DateTime fecha, int cantidad, int productoId)
         {
-            OrdenId = entradaId;
+            EntradaId = entradaId;
             Fecha = fecha;
             Cantidad = cantidad;
             ProductoId = productoId;

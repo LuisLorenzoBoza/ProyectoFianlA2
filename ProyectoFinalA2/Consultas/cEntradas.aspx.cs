@@ -35,7 +35,7 @@ namespace ProyectoFinalA2.Consultas
                         break;
                     case 1://ID
                         id = Convert.ToInt32(FiltroTextBox.Text);
-                        filtro = c => c.OrdenId == id;
+                        filtro = c => c.EntradaId == id;
                         break;
                     case 2://ProductoId
                         id = Convert.ToInt32(FiltroTextBox.Text);
