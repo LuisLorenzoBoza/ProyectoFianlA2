@@ -67,19 +67,79 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Resources\iconfinder_1_1845739.png" />
+    <Content Include="Resources\iconfinder_bill_416404.png" />
+    <Content Include="Resources\iconfinder_cart_3018582.png" />
+    <Content Include="Resources\iconfinder_Delete_1493279.png" />
+    <Content Include="Resources\iconfinder_eccomerce_-_search_3440910.png" />
+    <Content Include="Resources\iconfinder_food-hamburder-v1_2386376 %281%29.png" />
+    <Content Include="Resources\iconfinder_lock_511942.png" />
+    <Content Include="Resources\iconfinder_new-file_85332.png" />
+    <Content Include="Resources\iconfinder_Print_1493286.png" />
+    <Content Include="Resources\iconfinder_Save_70652.png" />
+    <Content Include="Resources\iconfinder_user-group_285648.png" />
+    <Content Include="Resources\if_basket_1814090.png" />
+    <Content Include="Resources\if_clients_43573.png" />
+    <Content Include="Resources\if_Find01_928435.png" />
+    <Content Include="Resources\if_ic_fiber_new_48px_3669431.png" />
+    <Content Include="Resources\if_Login Manager_7261.png" />
+    <Content Include="Resources\if_minus_square_black_243656.png" />
+    <Content Include="Resources\if_Plus_206460.png" />
+    <Content Include="Resources\if_save_46830.png" />
+    <Content Include="Resources\if_sign-add_299068.png" />
+    <Content Include="Resources\if_users_61816.png" />
+    <Content Include="Resources\if_window-new_3671912.png" />
+    <Content Include="Resources\PcJ_2.jpg" />
+    <Content Include="Resources\PcJ_Buffet.jpg" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\.DS_Store" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
     <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Site.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Consultas\" />
+    <Folder Include="Registros\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
