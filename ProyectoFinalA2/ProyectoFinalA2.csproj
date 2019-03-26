@@ -73,6 +73,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Consultas\cEntradas.aspx" />
+    <Content Include="Consultas\cOrdenes.aspx" />
+    <Content Include="Consultas\cProductos.aspx" />
+    <Content Include="Consultas\cUsuarios.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -119,6 +123,34 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consultas\cEntradas.aspx.cs">
+      <DependentUpon>cEntradas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\cEntradas.aspx.designer.cs">
+      <DependentUpon>cEntradas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\cOrdenes.aspx.cs">
+      <DependentUpon>cOrdenes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\cOrdenes.aspx.designer.cs">
+      <DependentUpon>cOrdenes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\cProductos.aspx.cs">
+      <DependentUpon>cProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\cProductos.aspx.designer.cs">
+      <DependentUpon>cProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\cUsuarios.aspx.cs">
+      <DependentUpon>cUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\cUsuarios.aspx.designer.cs">
+      <DependentUpon>cUsuarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -193,7 +225,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Consultas\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">

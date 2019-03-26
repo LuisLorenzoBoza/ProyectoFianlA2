@@ -27,7 +27,7 @@ namespace ProyectoFinalA2.Registros
 
         private void LlenaCampos(EntradaProducto entrada)
         {
-            entradaIdTextbox.Text = entrada.EntradaId.ToString();
+            entradaIdTextbox.Text = entrada.OrdenId.ToString();
             fechaTextbox.Text = entrada.Fecha.ToString("yyyy-MM-dd");
             productoIdTextbox.Text = entrada.ProductoId.ToString();
             cantidadTextbox.Text = entrada.Cantidad.ToString();
