@@ -38,14 +38,15 @@
                 <asp:GridView ID="DataGridView"
                     runat="server"
                     class="table table-condensed table-bordered table-responsive"
-                    CellPadding="4" ForeColor="Black" GridLines="Horizontal" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px">
+                    CellPadding="4" ForeColor="Black" GridLines="Horizontal" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" AutoGenerateColumns="False" DataKeyNames="OrdenId" DataSourceID="ProyectoFinalA2Db">
 
                     <Columns>
-                        <asp:HyperLinkField ControlStyle-ForeColor="Black"
-                            DataNavigateUrlFields="ProductoId"
-                            DataNavigateUrlFormatString="rProductos.aspx?Id={0}">
-                            <ControlStyle ForeColor="Black"></ControlStyle>
-                        </asp:HyperLinkField>
+                        <asp:BoundField DataField="OrdenId" HeaderText="OrdenId" InsertVisible="False" ReadOnly="True" SortExpression="OrdenId" />
+                        <asp:BoundField DataField="UsuarioId" HeaderText="UsuarioId" SortExpression="UsuarioId" />
+                        <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" SortExpression="Cantidad" />
+                        <asp:BoundField DataField="SubTotal" HeaderText="SubTotal" SortExpression="SubTotal" />
+                        <asp:BoundField DataField="Itbis" HeaderText="Itbis" SortExpression="Itbis" />
+                        <asp:BoundField DataField="Total" HeaderText="Total" SortExpression="Total" />
                     </Columns>
                     <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
                     <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
@@ -56,6 +57,7 @@
                     <SortedDescendingCellStyle BackColor="#E5E5E5" />
                     <SortedDescendingHeaderStyle BackColor="#242121" />
                 </asp:GridView>
+                <asp:SqlDataSource ID="ProyectoFinalA2Db" runat="server" ConnectionString="<%$ ConnectionStrings:ConStr %>" SelectCommand="SELECT [OrdenId], [UsuarioId], [Cantidad], [SubTotal], [Itbis], [Total] FROM [Ordens]"></asp:SqlDataSource>
             </div>
 
             <div class="row">
@@ -94,4 +96,3 @@
         </div>
     </div>
 </asp:Content>
-

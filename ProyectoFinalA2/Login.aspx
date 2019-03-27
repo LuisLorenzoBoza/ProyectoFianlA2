@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Deep Buy</title>
+    <title>Sistema de Pedidos</title>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/toastr.min.css" rel="stylesheet" />
     <script src="Scripts/jquery-3.3.1.min.js"></script>
@@ -30,7 +30,7 @@
 </head>
 <body background="Resources/pedido.jpg">
     <div class="container jumbotron">
-        <h2 class="h2">Deep Buy</h2>
+        <h2 class="h2">Sistema de Pedidos</h2>
         <form runat="server">
             <div class="row">
                 <div class="form-group col-lg-4 col-sm-12">

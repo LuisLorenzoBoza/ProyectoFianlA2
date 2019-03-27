@@ -58,6 +58,15 @@ namespace ProyectoFinalA2.Registros {
         protected global::System.Web.UI.WebControls.GridView DataGridView;
         
         /// <summary>
+        /// ProyectoFinalA2Db control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource ProyectoFinalA2Db;
+        
+        /// <summary>
         /// totalTextbox control.
         /// </summary>
         /// <remarks>

@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Sistema de Pedidos</title>
+    <title>Deep Buy</title>
 
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Content/toastr.min.css" rel="stylesheet" />
@@ -28,7 +28,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body background="Resources/pedido.jpg" >
+<body background="Resources/pedidos.jpg" >
     <form runat="server">
     <script src="Scripts/jquery-3.3.1.min.js"></script>
     <script src="Scripts/popper.min.js"></script>
@@ -43,7 +43,7 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                    <a href="Default.aspx" class="nav-link">Inicio</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -51,12 +51,11 @@
                         Registros
                     </a>
                     <div class="dropdown-menu" aria-labelledby="menu-registros">
-                        <a class="dropdown-item" href="/Registros/rUsuarios.aspx">Registrar Usuario</a>
+                        <a class="dropdown-item" href="/Registros/rUsuarios.aspx">Registrar Usuarios</a>
                         <a class="dropdown-item" href="/Registros/rProductos.aspx">Registrar Producto</a>
-                        <a class="dropdown-item" href="/Registros/rEntradas.aspx">Registrar Entrada de Producto</a>
+                        <a class="dropdown-item" href="/Registros/rEntradas.aspx">Registrara Entradas de Productos</a>
                         <a class="dropdown-item" href="/Registros/rOrdenes.aspx">Registrar Orden</a>
-           
-                      
+                        
                     </div>
                 </li>
 
@@ -66,7 +65,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="menu-consultas">
                         <a class="dropdown-item" href="/Consultas/cUsuarios.aspx">Consultar Usuarios</a>
-                        <a class="dropdown-item" href="/Consultas/cProductos.aspx">Consultar Productos</a> 
+                        <a class="dropdown-item" href="/Consultas/cProductos.aspx">Consultar Productos</a>
                         <a class="dropdown-item" href="/Consultas/cEntradas.aspx">Consultar Entradas de Productos</a>
                         <a class="dropdown-item" href="/Consultas/cOrdenes.aspx">Consultar Ordenes</a>
                         

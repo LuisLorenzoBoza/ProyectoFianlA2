@@ -26,7 +26,7 @@ namespace ProyectoFinalA2.Registros
         {
             ordenIdTextbox.Text = "0";
             fechaTextbox.Text = DateTime.Today.ToString();
-            usuarioIdTextbox.Text = "1";
+            usuarioIdTextbox.Text = "0";
             DatosGridView.Visible = true;
             DatosGridView.DataBind();
         }
