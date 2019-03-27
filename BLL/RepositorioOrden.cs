@@ -17,7 +17,7 @@ namespace BLL
 
         public override Orden Buscar(int id)
         {
-            Orden orden = contexto.Ordenes.Find(id);
+            Orden orden = contexto.Orden.Find(id);
             if (orden != null)
             {
                 orden.Detalle.Count();
@@ -37,10 +37,10 @@ namespace BLL
 
             foreach (var item in entity.Detalle)
             {
-                contexto.Productos.Find(item.ProductoId).Inventario -= item.Cantidad;
+                contexto.Producto.Find(item.ProductoId).Inventario -= item.Cantidad;
             }
 
-            var usuario = contexto.Usuarios.Find(entity.UsuarioId);
+            var usuario = contexto.Usuario.Find(entity.UsuarioId);
             usuario.Ordenes += 1;
             contexto.SaveChanges();
 
@@ -50,7 +50,7 @@ namespace BLL
         public override bool Modificar(Orden entity)
         {
             //PON ESTA VAINA A FUNCIONAR CARAJO!!
-            var ordenAnterior = contexto.Ordenes.Include(x => x.Detalle).Where(z => z.OrdenId == entity.OrdenId).AsNoTracking().FirstOrDefault();
+            var ordenAnterior = contexto.Orden.Include(x => x.Detalle).Where(z => z.OrdenId == entity.OrdenId).AsNoTracking().FirstOrDefault();
 
             foreach (var item in ordenAnterior.Detalle)
             {
@@ -67,17 +67,17 @@ namespace BLL
 
         public override bool Eliminar(int id)
         {
-            Orden orden = contexto.Ordenes.Find(id);
+            Orden orden = contexto.Orden.Find(id);
 
             foreach (var item in orden.Detalle)
             {
-                contexto.Productos.Find(item.ProductoId).Inventario += item.Cantidad;
+                contexto.Producto.Find(item.ProductoId).Inventario += item.Cantidad;
 
             }
 
-            contexto.Usuarios.Find(orden.UsuarioId).Ordenes -= 1;
+            contexto.Usuario.Find(orden.UsuarioId).Ordenes -= 1;
             orden.Detalle.Count();
-            contexto.Ordenes.Remove(orden);
+            contexto.Orden.Remove(orden);
             contexto.SaveChanges();
 
             return base.Eliminar(id);

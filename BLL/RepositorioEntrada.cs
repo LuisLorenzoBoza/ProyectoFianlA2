@@ -17,7 +17,7 @@ namespace BLL
 
         public override bool Guardar(EntradaProducto entity)
         {
-            var producto = contexto.Productos.Find(entity.ProductoId);
+            var producto = contexto.Producto.Find(entity.ProductoId);
             producto.Inventario += entity.Cantidad;
             contexto.Entry(producto).State = EntityState.Modified;
             contexto.SaveChanges();
@@ -27,7 +27,7 @@ namespace BLL
 
         public override bool Modificar(EntradaProducto entity)
         {
-            var entradaAnterior = contexto.Entradas.Include(x => x.Producto).Where(z => z.EntradaId == entity.EntradaId).AsNoTracking().FirstOrDefault();
+            var entradaAnterior = contexto.EntradaProducto.Include(x => x.Producto).Where(z => z.EntradaId == entity.EntradaId).AsNoTracking().FirstOrDefault();
 
             Producto producto = entradaAnterior.Producto;
             producto.Inventario -= entradaAnterior.Cantidad;
