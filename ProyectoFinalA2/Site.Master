@@ -43,7 +43,7 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a href="Default.aspx" class="nav-link">Inicio</a>
+                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -51,10 +51,12 @@
                         Registros
                     </a>
                     <div class="dropdown-menu" aria-labelledby="menu-registros">
-                        <a href="rUsuarios.aspx" class="dropdown-item">Registrar Usuario</a>
-                        <a href="rProductos.aspx" class="dropdown-item">Registrar Producto</a>
-                        <a href="rEntradas.aspx" class="dropdown-item">Registrar Entrada de Producto</a>
-                        <a href="rOrdenes.aspx" class="dropdown-item">Registrar Orden</a>
+                        <a class="dropdown-item" href="/Registros/rUsuarios.aspx">Registrar Usuario</a>
+                        <a class="dropdown-item" href="/Registros/rProductos.aspx">Registrar Producto</a>
+                        <a class="dropdown-item" href="/Registros/rEntradas.aspx">Registrar Entrada de Producto</a>
+                        <a class="dropdown-item" href="/Registros/rOrdenes.aspx">Registrar Orden</a>
+           
+                      
                     </div>
                 </li>
 
@@ -63,10 +65,11 @@
                         Consultas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="menu-consultas">
-                        <a href="cUsuarios.aspx" class="dropdown-item">Consultar Usuarios</a>
-                        <a href="cProductos.aspx" class="dropdown-item">Consultar Productos</a>
-                        <a href="cEntradas.aspx" class="dropdown-item">Consultar Entradas de Productos</a>
-                        <a href="cOrdenes.aspx" class="dropdown-item">Consultar Ordenes</a>
+                        <a class="dropdown-item" href="/Consultas/cUsuarios.aspx">Consultar Usuarios</a>
+                        <a class="dropdown-item" href="/Consultas/cProductos.aspx">Consultar Productos</a> 
+                        <a class="dropdown-item" href="/Consultas/cEntradas.aspx">Consultar Entradas de Productos</a>
+                        <a class="dropdown-item" href="/Consultas/cOrdenes.aspx">Consultar Ordenes</a>
+                        
                     </div>
                 </li>
 
