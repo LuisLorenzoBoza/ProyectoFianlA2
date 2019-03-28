@@ -24,7 +24,7 @@ namespace ProyectoFinalA2.Consultas
             }
             else
             {
-                Expression<Func<EntradaProducto, bool>> filtro = x => true;
+                Expression<Func<Entrada, bool>> filtro = x => true;
                 BLL.RepositorioEntrada repositorio = new BLL.RepositorioEntrada();
 
                 int id;

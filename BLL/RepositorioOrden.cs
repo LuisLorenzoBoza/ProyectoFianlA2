@@ -49,7 +49,7 @@ namespace BLL
 
         public override bool Modificar(Orden entity)
         {
-            //PON ESTA VAINA A FUNCIONAR CARAJO!!
+            
             var ordenAnterior = contexto.Orden.Include(x => x.Detalle).Where(z => z.OrdenId == entity.OrdenId).AsNoTracking().FirstOrDefault();
 
             foreach (var item in ordenAnterior.Detalle)

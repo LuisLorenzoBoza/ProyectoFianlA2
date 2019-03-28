@@ -250,6 +250,8 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Site.Master" />
+    <None Include="Properties\PublishProfiles\Proyectox - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Proyectox - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

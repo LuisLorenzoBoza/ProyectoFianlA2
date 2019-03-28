@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Entidades
 {
     [Serializable]
-    public class EntradaProducto
+    public class Entrada
     {
         [Key]
         public int EntradaId { get; set; }
@@ -17,7 +17,7 @@ namespace Entidades
         public int ProductoId { get; set; }
         public virtual Producto Producto { get; set; }
 
-        public EntradaProducto()
+        public Entrada()
         {
             EntradaId = 0;
             Fecha = DateTime.Now;
@@ -25,7 +25,7 @@ namespace Entidades
             ProductoId = 0;
         }
 
-        public EntradaProducto(int entradaId, DateTime fecha, int cantidad, int productoId)
+        public Entrada(int entradaId, DateTime fecha, int cantidad, int productoId)
         {
             EntradaId = entradaId;
             Fecha = fecha;

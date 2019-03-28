@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class RepositorioEntrada : RepositorioBase<EntradaProducto>
+    public class RepositorioEntrada : RepositorioBase<Entrada>
     {
         public RepositorioEntrada() : base()
         {
 
         }
 
-        public override bool Guardar(EntradaProducto entity)
+        public override bool Guardar(Entrada entity)
         {
             var producto = contexto.Producto.Find(entity.ProductoId);
             producto.Inventario += entity.Cantidad;
@@ -25,7 +25,7 @@ namespace BLL
             return base.Guardar(entity);
         }
 
-        public override bool Modificar(EntradaProducto entity)
+        public override bool Modificar(Entrada entity)
         {
             var entradaAnterior = contexto.EntradaProducto.Include(x => x.Producto).Where(z => z.EntradaId == entity.EntradaId).AsNoTracking().FirstOrDefault();
 

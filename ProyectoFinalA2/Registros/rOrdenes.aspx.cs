@@ -16,6 +16,7 @@ namespace ProyectoFinalA2.Registros
         List<OrdenDetalle> Detalle = new List<OrdenDetalle>();
 
         protected void Page_Load(object sender, EventArgs e)
+
         {
             DataGridView.Visible = true;
             DataGridView.DataBind();

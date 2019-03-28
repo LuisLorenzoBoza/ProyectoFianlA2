@@ -25,7 +25,7 @@ namespace ProyectoFinalA2.Registros
             cantidadTextbox.Text = "0";
         }
 
-        private void LlenaCampos(EntradaProducto entrada)
+        private void LlenaCampos(Entrada entrada)
         {
             entradaIdTextbox.Text = entrada.EntradaId.ToString();
             fechaTextbox.Text = entrada.Fecha.ToString("yyyy-MM-dd");
@@ -33,9 +33,9 @@ namespace ProyectoFinalA2.Registros
             cantidadTextbox.Text = entrada.Cantidad.ToString();
         }
 
-        private EntradaProducto LlenaClase()
+        private Entrada LlenaClase()
         {
-            var entrada = new EntradaProducto();
+            var entrada = new Entrada();
             entrada.Fecha = Convert.ToDateTime(fechaTextbox.Text);
             entrada.ProductoId = int.Parse(productoIdTextbox.Text);
             entrada.Cantidad = int.Parse(cantidadTextbox.Text);
@@ -51,7 +51,7 @@ namespace ProyectoFinalA2.Registros
                 if (id != 0)
                 {
                     RepositorioEntrada repositorio = new RepositorioEntrada();
-                    EntradaProducto entrada = repositorio.Buscar(id);
+                    Entrada entrada = repositorio.Buscar(id);
 
                     if (entrada != null)
                     {
@@ -92,7 +92,7 @@ namespace ProyectoFinalA2.Registros
                     {
                         if (repositorio.Buscar(id) != null && repositorioBase.Buscar(int.Parse(productoIdTextbox.Text)) != null)
                         {
-                            EntradaProducto entrada = repositorio.Buscar(int.Parse(entradaIdTextbox.Text));
+                            Entrada entrada = repositorio.Buscar(int.Parse(entradaIdTextbox.Text));
 
                             entrada.ProductoId = int.Parse(entradaIdTextbox.Text);
                             entrada.Fecha = DateTime.Parse(fechaTextbox.Text);
