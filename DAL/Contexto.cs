@@ -10,12 +10,11 @@ namespace DAL
 {
     public class Contexto : DbContext
     {
-        public DbSet<Usuario> Usuario { get; set; }
-        public DbSet<Admin> Admin { get; set; }
-        public DbSet<Producto> Producto { get; set; }
-        public DbSet<Entrada> EntradaProducto { get; set; }
-        public DbSet<Orden> Orden { get; set; }
-        public DbSet<OrdenDetalle> OrdenesDetalle { get; set; }
+        public DbSet<Usuarios> Usuario { get; set; }
+        public DbSet<Articulos> Articulos { get; set; }
+        public DbSet<Clientes> Cliente { get; set; }
+        public DbSet<Categorias> Categoria { get; set; }
+        public DbSet<Facturas> Facturas { get; set; }
 
         public Contexto() : base("ConStr")
         {

@@ -82,7 +82,7 @@ namespace ProyectoFinalA2.Registros
                 if (!(productoIdTextbox.Text == "0" || cantidadTextbox.Text == "0" || String.IsNullOrEmpty(fechaTextbox.Text)))
                 {
                     RepositorioEntrada repositorio = new RepositorioEntrada();
-                    RepositorioBase<Producto> repositorioBase = new RepositorioBase<Producto>();
+                    RepositorioBase<Articulos> repositorioBase = new RepositorioBase<Articulos>();
                     if (id == 0 && repositorioBase.Buscar(int.Parse(productoIdTextbox.Text)) != null)
                     {
                         repositorio.Guardar(LlenaClase());

@@ -24,8 +24,8 @@ namespace ProyectoFinalA2.Consultas
             }
             else
             {
-                Expression<Func<Producto, bool>> filtro = x => true;
-                BLL.RepositorioBase<Producto> repositorio = new BLL.RepositorioBase<Producto>();
+                Expression<Func<Articulos, bool>> filtro = x => true;
+                BLL.RepositorioBase<Articulos> repositorio = new BLL.RepositorioBase<Articulos>();
 
                 int id;
                 switch (BuscarPorDropDownList.SelectedIndex)

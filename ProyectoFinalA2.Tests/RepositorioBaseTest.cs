@@ -8,8 +8,8 @@ namespace ProyectoFinalA2.Tests
     [TestClass]
     public class RepositorioBaseTest
     {
-        RepositorioBase<Usuario> repositorio = new RepositorioBase<Usuario>();
-        Usuario usuario = new Usuario();
+        RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
+        Usuarios usuario = new Usuarios();
 
         [TestMethod]
         public void Guardar()

@@ -26,7 +26,7 @@ namespace ProyectoFinalA2.Registros
             ordenesTextbox.Text = "0";
         }
 
-        private void LlenaCampos(Usuario usuario)
+        private void LlenaCampos(Usuarios usuario)
         {
             usuarioIdTextbox.Text = usuario.UsuarioId.ToString();
             nombreTextbox.Text = usuario.Nombre;
@@ -35,9 +35,9 @@ namespace ProyectoFinalA2.Registros
             ordenesTextbox.Text = usuario.Ordenes.ToString();
         }
 
-        private Usuario LlenaClase()
+        private Usuarios LlenaClase()
         {
-            var usuario = new Usuario();
+            var usuario = new Usuarios();
             usuario.Nombre = nombreTextbox.Text;
             usuario.Apellido = apellidoTextbox.Text;
             usuario.Email = emailTextbox.Text;
@@ -52,8 +52,8 @@ namespace ProyectoFinalA2.Registros
                 int id = Convert.ToInt32(usuarioIdTextbox.Text);
                 if (id != 0)
                 {
-                    RepositorioBase<Usuario> repositorio = new RepositorioBase<Usuario>();
-                    Usuario usuario = repositorio.Buscar(id);
+                    RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
+                    Usuarios usuario = repositorio.Buscar(id);
 
                     if (usuario != null)
                     {
@@ -84,7 +84,7 @@ namespace ProyectoFinalA2.Registros
                 int id = Convert.ToInt32(usuarioIdTextbox.Text);
                 if (!(String.IsNullOrEmpty(nombreTextbox.Text) || String.IsNullOrEmpty(apellidoTextbox.Text) || String.IsNullOrEmpty(emailTextbox.Text)))
                 {
-                    RepositorioBase<Usuario> repositorio = new RepositorioBase<Usuario>();
+                    RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
                     if (id == 0)
                     {
                         repositorio.Guardar(LlenaClase());
@@ -94,7 +94,7 @@ namespace ProyectoFinalA2.Registros
                     {
                         if (repositorio.Buscar(id) != null)
                         {
-                            Usuario usuario = repositorio.Buscar(int.Parse(usuarioIdTextbox.Text));
+                            Usuarios usuario = repositorio.Buscar(int.Parse(usuarioIdTextbox.Text));
 
                             usuario.UsuarioId = int.Parse(usuarioIdTextbox.Text);
                             usuario.Nombre = nombreTextbox.Text;
@@ -123,7 +123,7 @@ namespace ProyectoFinalA2.Registros
             int id = Convert.ToInt32(usuarioIdTextbox.Text);
             if (id != 0)
             {
-                RepositorioBase<Usuario> repositorio = new RepositorioBase<Usuario>();
+                RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
                 if (repositorio.Buscar(id) != null)
                 {
                     if (repositorio.Eliminar(id))

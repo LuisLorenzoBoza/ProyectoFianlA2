@@ -26,7 +26,7 @@ namespace ProyectoFinalA2.Registros
             inventarioTextbox.Text = "0";
         }
 
-        private void LlenaCampos(Producto producto)
+        private void LlenaCampos(Articulos producto)
         {
             productoIdTextbox.Text = producto.ProductoId.ToString();
             descripcionTextbox.Text = producto.Descripcion;
@@ -34,9 +34,9 @@ namespace ProyectoFinalA2.Registros
             inventarioTextbox.Text = producto.Inventario.ToString();
         }
 
-        private Producto LlenaClase()
+        private Articulos LlenaClase()
         {
-            var producto = new Producto();
+            var producto = new Articulos();
             producto.Descripcion = descripcionTextbox.Text;
             producto.Precio = float.Parse(precioTextbox.Text);
             producto.Inventario = int.Parse(inventarioTextbox.Text);
@@ -52,8 +52,8 @@ namespace ProyectoFinalA2.Registros
                 int id = Convert.ToInt32(productoIdTextbox.Text);
                 if (id != 0)
                 {
-                    RepositorioBase<Producto> repositorio = new RepositorioBase<Producto>();
-                    Producto producto = repositorio.Buscar(id);
+                    RepositorioBase<Articulos> repositorio = new RepositorioBase<Articulos>();
+                    Articulos producto = repositorio.Buscar(id);
 
                     if (producto != null)
                     {
@@ -83,7 +83,7 @@ namespace ProyectoFinalA2.Registros
                 int id = Convert.ToInt32(productoIdTextbox.Text);
                 if (!(String.IsNullOrEmpty(descripcionTextbox.Text) || String.IsNullOrEmpty(precioTextbox.Text) || String.IsNullOrEmpty(inventarioTextbox.Text)))
                 {
-                    RepositorioBase<Producto> repositorio = new RepositorioBase<Producto>();
+                    RepositorioBase<Articulos> repositorio = new RepositorioBase<Articulos>();
                     if (id == 0)
                     {
                         repositorio.Guardar(LlenaClase());
@@ -93,7 +93,7 @@ namespace ProyectoFinalA2.Registros
                     {
                         if (repositorio.Buscar(id) != null)
                         {
-                            Producto producto = repositorio.Buscar(int.Parse(productoIdTextbox.Text));
+                            Articulos producto = repositorio.Buscar(int.Parse(productoIdTextbox.Text));
 
                             producto.ProductoId = int.Parse(productoIdTextbox.Text);
                             producto.Descripcion = descripcionTextbox.Text;
@@ -122,7 +122,7 @@ namespace ProyectoFinalA2.Registros
             int id = Convert.ToInt32(productoIdTextbox.Text);
             if (id != 0)
             {
-                RepositorioBase<Producto> repositorio = new RepositorioBase<Producto>();
+                RepositorioBase<Articulos> repositorio = new RepositorioBase<Articulos>();
                 if (repositorio.Buscar(id) != null)
                 {
                     if (repositorio.Eliminar(id))
