@@ -16,134 +16,116 @@ namespace ProyectoFinalA2.Registros
 
         }
 
-
-        private void Limpiar()
+        protected void ButtonBuscar_Click(object sender, EventArgs e)
         {
-            usuarioIdTextbox.Text = "0";
-            nombreTextbox.Text = string.Empty;
-            apellidoTextbox.Text = string.Empty;
-            emailTextbox.Text = string.Empty;
-            ordenesTextbox.Text = "0";
-        }
+            RepositorioBase<Usuarios> usuarioRepository = new RepositorioBase<Usuarios>();
+            Usuarios usuario = usuarioRepository.Buscar(int.Parse(TextBoxUsuarioID.Text));
 
-        private void LlenaCampos(Usuarios usuario)
-        {
-            usuarioIdTextbox.Text = usuario.UsuarioId.ToString();
-            nombreTextbox.Text = usuario.Nombre;
-            apellidoTextbox.Text = usuario.Apellido;
-            emailTextbox.Text = usuario.Email;
-            ordenesTextbox.Text = usuario.Ordenes.ToString();
-        }
-
-        private Usuarios LlenaClase()
-        {
-            var usuario = new Usuarios();
-            usuario.Nombre = nombreTextbox.Text;
-            usuario.Apellido = apellidoTextbox.Text;
-            usuario.Email = emailTextbox.Text;
-
-            return usuario;
-        }
-
-        protected void BuscarButton_Click(object sender, EventArgs e)
-        {
-            if (!String.IsNullOrEmpty(usuarioIdTextbox.Text))
+            if (usuario != null)
             {
-                int id = Convert.ToInt32(usuarioIdTextbox.Text);
-                if (id != 0)
-                {
-                    RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
-                    Usuarios usuario = repositorio.Buscar(id);
-
-                    if (usuario != null)
-                    {
-                        LlenaCampos(usuario);
-                    }
-                    else
-                    {
-                        ScriptManager.RegisterStartupScript(Page, typeof(Page), "toastr_message", script: "toastr['error']('No existe');", addScriptTags: true);
-                    }
-                }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(Page, typeof(Page), "toastr_message", script: "toastr['warning']('Seleccione un ID');", addScriptTags: true);
-                }
-            }
-        }
-
-        protected void NuevoButton_Click(object sender, EventArgs e)
-        {
-            Limpiar();
-        }
-
-        protected void GuardarButton_Click(object sender, EventArgs e)
-        {
-            if (Page.IsValid)
-            {
-
-                int id = Convert.ToInt32(usuarioIdTextbox.Text);
-                if (!(String.IsNullOrEmpty(nombreTextbox.Text) || String.IsNullOrEmpty(apellidoTextbox.Text) || String.IsNullOrEmpty(emailTextbox.Text)))
-                {
-                    RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
-                    if (id == 0)
-                    {
-                        repositorio.Guardar(LlenaClase());
-                        ScriptManager.RegisterStartupScript(Page, typeof(Page), "toastr_message", script: "toastr['success']('Guardado con Exito');", addScriptTags: true);
-                    }
-                    else
-                    {
-                        if (repositorio.Buscar(id) != null)
-                        {
-                            Usuarios usuario = repositorio.Buscar(int.Parse(usuarioIdTextbox.Text));
-
-                            usuario.UsuarioId = int.Parse(usuarioIdTextbox.Text);
-                            usuario.Nombre = nombreTextbox.Text;
-                            usuario.Apellido = apellidoTextbox.Text;
-                            usuario.Email = emailTextbox.Text;
-
-                            repositorio.Modificar(usuario);
-                            ScriptManager.RegisterStartupScript(Page, typeof(Page), "toastr_message", script: "toastr['success']('Modificado con Exito');", addScriptTags: true);
-                        }
-                        else
-                        {
-                            ScriptManager.RegisterStartupScript(Page, typeof(Page), "toastr_message", script: "toastr['error']('No existe un usuario con ese ID, no puede modificarse');", addScriptTags: true);
-                        }
-                    }
-                }
-                else if (id == 0)
-                {
-                    ScriptManager.RegisterStartupScript(Page, typeof(Page), "toastr_message", script: "toastr['warning']('Debe rellenar todos los campos');", addScriptTags: true);
-                }
-                Limpiar();
-            }
-        }
-
-        protected void EliminarButton_Click(object sender, EventArgs e)
-        {
-            int id = Convert.ToInt32(usuarioIdTextbox.Text);
-            if (id != 0)
-            {
-                RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
-                if (repositorio.Buscar(id) != null)
-                {
-                    if (repositorio.Eliminar(id))
-                    {
-                        ScriptManager.RegisterStartupScript(Page, typeof(Page), "toastr_message", script: "toastr['success']('Eliminado con Exito');", addScriptTags: true);
-                    }
-                    else
-                    {
-                        ScriptManager.RegisterStartupScript(Page, typeof(Page), "toastr_message", script: "toastr['error']('No se pudo eliminar');", addScriptTags: true);
-                    }
-                    Limpiar();
-                }
-                else
-                {
-                    ScriptManager.RegisterStartupScript(Page, typeof(Page), "toastr_message", script: "toastr['error']('No existe');", addScriptTags: true);
-                }
+                LlenarCampos(usuario);
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Usuario Encontrado');", addScriptTags: true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(Page, typeof(Page), "toastr_message", script: "toastr['warning']('Seleccione un ID');", addScriptTags: true);
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['error']('Usuario no Encontrado');", addScriptTags: true);
+            }
+        }
+
+        private void ClearAll()
+        {
+            TextBoxUsuarioID.Text = String.Empty;
+            TextBoxNombre.Text = String.Empty;
+            TextBoxUsername.Text = String.Empty;
+            TextBoxPassword.Text = String.Empty;
+            TextBoxConfirmacionPassword.Text = String.Empty;
+            TextBoxEmail.Text = String.Empty;
+            TextBoxFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
+        }
+
+        private void LlenarCampos(Usuarios usuario)
+        {
+            TextBoxUsername.Text = usuario.Username;
+            TextBoxPassword.Text = usuario.Password;
+            TextBoxFecha.Text = usuario.Fecha.ToString("yyyy-MM-dd");
+            TextBoxNombre.Text = usuario.Nombre;
+            TextBoxEmail.Text = usuario.Comentario;
+        }
+
+        protected void ButtonNuevo_Click(object sender, EventArgs e)
+        {
+            ClearAll();
+        }
+
+        protected void ButtonGuardar_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                RepositorioBase<Usuarios> usuario = new RepositorioBase<Usuarios>();
+
+                int id = 0;
+
+                if (TextBoxPassword.Text == TextBoxConfirmacionPassword.Text)
+                {
+                    if (ComprobarID(id) == 0)
+                    {
+                        if (usuario.Guardar(LlenaClase()))
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Usuario Guardado');", addScriptTags: true);
+                        ClearAll();
+                    }
+                    else
+                    {
+                        if (usuario.Modificar(LlenaClase()))
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Usuario Modificado');", addScriptTags: true);
+                        ClearAll();
+                    }
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['info']('Recuerde que la contraseña debe ser igual a la confirmacion de esta');", addScriptTags: true);
+                }
+            }
+        }
+
+
+        private Usuarios LlenaClase()
+        {
+            int id = 0;
+            return new Usuarios(
+                ComprobarID(id),
+                TextBoxUsername.Text,
+                TextBoxPassword.Text,
+                Convert.ToDateTime(TextBoxFecha.Text),
+                TextBoxNombre.Text,
+                TextBoxEmail.Text
+                );
+        }
+
+        private int ComprobarID(int id)
+        {
+            if (TextBoxUsuarioID.Text == String.Empty)
+                id = 0;
+            else
+                id = int.Parse(TextBoxUsuarioID.Text);
+            return id;
+        }
+
+        protected void ButtonEliminar_Click(object sender, EventArgs e)
+        {
+            RepositorioBase<Usuarios> usuarioRepository = new RepositorioBase<Usuarios>();
+            Usuarios usuario = usuarioRepository.Buscar(int.Parse(TextBoxUsuarioID.Text));
+
+            int.TryParse(TextBoxUsuarioID.Text, out int id);
+
+            if (usuario != null)
+            {
+                usuarioRepository.Eliminar(int.Parse(TextBoxUsuarioID.Text));
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Usuario Eliminado');", addScriptTags: true);
+                ClearAll();
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['error']('No se puede eliminar un usuario que no existe');", addScriptTags: true);
             }
         }
     }

@@ -109,9 +109,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="Login.aspx" />
-    <Content Include="Registros\rEntradas.aspx" />
-    <Content Include="Registros\rOrdenes.aspx" />
-    <Content Include="Registros\rProductos.aspx" />
+    <Content Include="Registros\rArticulosaspx.aspx" />
+    <Content Include="Registros\rCategorias.aspx" />
     <Content Include="Registros\rUsuarios.aspx" />
     <Content Include="Resources\iconfinder_bill_416404.png" />
     <Content Include="Resources\iconfinder_cart_3018582.png" />
@@ -199,26 +198,19 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registros\rEntradas.aspx.cs">
-      <DependentUpon>rEntradas.aspx</DependentUpon>
+    <Compile Include="Registros\rArticulosaspx.aspx.cs">
+      <DependentUpon>rArticulosaspx.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Registros\rEntradas.aspx.designer.cs">
-      <DependentUpon>rEntradas.aspx</DependentUpon>
+    <Compile Include="Registros\rArticulosaspx.aspx.designer.cs">
+      <DependentUpon>rArticulosaspx.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Registros\rOrdenes.aspx.cs">
-      <DependentUpon>rOrdenes.aspx</DependentUpon>
+    <Compile Include="Registros\rCategorias.aspx.cs">
+      <DependentUpon>rCategorias.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Registros\rOrdenes.aspx.designer.cs">
-      <DependentUpon>rOrdenes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Registros\rProductos.aspx.cs">
-      <DependentUpon>rProductos.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Registros\rProductos.aspx.designer.cs">
-      <DependentUpon>rProductos.aspx</DependentUpon>
+    <Compile Include="Registros\rCategorias.aspx.designer.cs">
+      <DependentUpon>rCategorias.aspx</DependentUpon>
     </Compile>
     <Compile Include="Registros\rUsuarios.aspx.cs">
       <DependentUpon>rUsuarios.aspx</DependentUpon>
