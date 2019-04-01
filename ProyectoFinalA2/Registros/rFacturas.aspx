@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="rFacturas.aspx.cs" Inherits="ProyectoFinalA2.Registros.rFacturas" %>
+﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="rFacturas.aspx.cs" Inherits="ProyectoFinalA2.Registros.rFacturas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
