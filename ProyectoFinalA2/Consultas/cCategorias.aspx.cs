@@ -58,7 +58,7 @@ namespace ProyectoFinalA2.Consultas
             CategoriaGridView.DataBind();
         }
 
-        protected void CategoriaGridView_SelectedIndexChanged(object sender, EventArgs e)
+        protected void CategoriaGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             RepositorioBase<Categorias> rb = new RepositorioBase<Categorias>();
             CategoriaGridView.DataSource = rb.GetList(filtro);

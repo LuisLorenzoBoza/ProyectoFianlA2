@@ -42,9 +42,8 @@ namespace ProyectoFinalA2.Consultas
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ReporteModal", "$('#ReporteModal').modal();", true);
         }
 
-        protected void FacturaGridView_SelectedIndexChanged(object sender, EventArgs e)
+        protected void FacturaGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-
             FacturaGridView.DataSource = repositorio.GetList(filter);
             FacturaGridView.PageIndex = e.NewPageIndex;
             FacturaGridView.DataBind();

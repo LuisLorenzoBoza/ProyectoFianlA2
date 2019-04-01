@@ -33,13 +33,7 @@ namespace ProyectoFinalA2.Consultas
 
         }
 
-        protected void ArticuloGridView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RepositorioBase<Articulos> rep = new RepositorioBase<Articulos>();
-            ArticuloGridView.DataSource = rep.GetList(filtro);
-            ArticuloGridView.PageIndex = e.NewPageIndex;
-            ArticuloGridView.DataBind();
-        }
+        
 
         protected void BuscarLinkButton_Click(object sender, EventArgs e)
         {
@@ -94,6 +88,14 @@ namespace ProyectoFinalA2.Consultas
             //ArticulosReportViewer.LocalReport.DataSources.Add(new ReportDataSource("Articulos", repositorio.GetList(filtro)));
             //ArticulosReportViewer.LocalReport.Refresh();
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "ReporteModal", "$('#ReporteModal').modal();", true);
+        }
+
+        protected void ArticuloGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            RepositorioBase<Articulos> rep = new RepositorioBase<Articulos>();
+            ArticuloGridView.DataSource = rep.GetList(filtro);
+            ArticuloGridView.PageIndex = e.NewPageIndex;
+            ArticuloGridView.DataBind();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace ProyectoFinalA2.Consultas
             }
         }
 
-        protected void UsuarioGridView_SelectedIndexChanged(object sender, EventArgs e)
+        protected void DatosGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             RepositorioBase<Usuarios> rep = new RepositorioBase<Usuarios>();
             UsuarioGridView.DataSource = rep.GetList(filtro);

@@ -64,13 +64,12 @@ namespace ProyectoFinalA2.Consultas
             }
         }
 
-        protected void ClienteGridView_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ClienteGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             ClienteGridView.DataSource = repositorio.GetList(filtro);
             ClienteGridView.PageIndex = e.NewPageIndex;
             ClienteGridView.DataBind();
         }
-
         protected void ButtonImprimir_Click(object sender, EventArgs e)
         {
             //Filtrar();
