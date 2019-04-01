@@ -1,5 +1,4 @@
-﻿using DAL;
-using Entidades;
+﻿using Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,7 +13,7 @@ namespace BLL
     {
         public override Facturas Buscar(int id)
         {
-            Facturas facturas = Contexto.Facturas.
+            Facturas facturas = _contexto.Facturas.
                                  Include(x => x.Lista)
                                  .Where(z => z.IdFactura == id)
                                  .FirstOrDefault();
