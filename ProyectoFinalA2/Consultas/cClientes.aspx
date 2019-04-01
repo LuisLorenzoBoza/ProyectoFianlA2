@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="cUsuarios.aspx.cs" Inherits="ProyectoFinalA2.Consultas.cUsuarios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="cClientes.aspx.cs" Inherits="ProyectoFinalA2.Consultas.cClientes" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
@@ -8,22 +8,10 @@
 
     <div class="jumbotron">
         <div class="page-header text-center">
-            <h2 style="color: #358CCE">Consulta de Usuarios</h2>
+            <h2 style="color: #358CCE">Consulta de Clientes</h2>
         </div>
 
         <hr style="color: #358CCE" />
-
-        <div class="form-group row justify-content-center">
-            <div class="col-lg-4">
-                <asp:Label ID="Label1" runat="server" Text="Fecha-inicio">Desde:</asp:Label>
-                <asp:TextBox ID="TextBoxFechaInicial" CssClass="form-control" TextMode="Date" runat="server"></asp:TextBox>
-            </div>
-            <div class="col-lg-2"></div>
-            <div class="col-lg-4">
-                <asp:Label ID="Label2" runat="server" Text="Fecha-inicial">Hasta:</asp:Label>
-                <asp:TextBox ID="TextBoxFechaFinal" CssClass="form-control" TextMode="Date" runat="server"></asp:TextBox>
-            </div>
-        </div>
 
         <div>
             <div class="form-group">
@@ -32,9 +20,10 @@
                         <label for="DropDownListFiltro">Filtro:</label>
                         <asp:DropDownList ID="DropDownListFiltro" CssClass="form-control" runat="server">
                             <asp:ListItem></asp:ListItem>
-                            <asp:ListItem>UsuarioId</asp:ListItem>
-                            <asp:ListItem>UserName</asp:ListItem>
-                            <asp:ListItem>Password</asp:ListItem>
+                            <asp:ListItem>ClienteID</asp:ListItem>
+                            <asp:ListItem>Nombre</asp:ListItem>
+                            <asp:ListItem>Apellido</asp:ListItem>
+                            <asp:ListItem>Email</asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-lg-1"></div>
@@ -52,13 +41,13 @@
 
                 <div class="row justify-content-center mt-3">
                     <div class="col-lg-11">
-                        <asp:GridView ID="UsuarioGridView" runat="server" AllowPaging="true" PageSize="7" CssClass="table table-striped table-hover table-responsive-lg" OnPageIndexChanging="DatosGridView_PageIndexChanging" AutoGenerateColumns="False" OnSelectedIndexChanged="UsuarioGridView_SelectedIndexChanged">
+                        <asp:GridView ID="ClienteGridView" runat="server" AllowPaging="true" PageSize="7" CssClass="table table-striped table-hover table-responsive-lg" OnPageIndexChanging="ClienteGridView_PageIndexChanging" AutoGenerateColumns="False" OnSelectedIndexChanged="ClienteGridView_SelectedIndexChanged">
                             <HeaderStyle BackColor="#337ab7" Font-Bold="True" ForeColor="White" />
                             <Columns>
-                                <asp:BoundField DataField="IdUsuario" HeaderText="UsuarioId" />
-                                <asp:BoundField DataField="Username" HeaderText="UserName" />
-                                <asp:BoundField DataField="Password" HeaderText="Password" />
-                                <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
+                                <asp:BoundField DataField="IdCliente" HeaderText="Cliente ID" />
+                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+                                <asp:BoundField DataField="Email" HeaderText="Email" />
                             </Columns>
                         </asp:GridView>
                     </div>
@@ -79,8 +68,8 @@
                             </div>
                             <div class="modal-body">
                                 <div id="div1">
-                                    <asp:ScriptManager ID="ScriptManager2" runat="server"></asp:ScriptManager>
-                                    <rsweb:ReportViewer ID="UsuariosReportViewer" width="100%" runat="server">
+                                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                                    <rsweb:ReportViewer ID="ClientesReportViewer" width="100%" runat="server">
                                         <ServerReport ReportPath=""  ReportServerUrl=""/>
                                     </rsweb:ReportViewer>
                                 </div>

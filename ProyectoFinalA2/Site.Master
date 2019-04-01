@@ -23,7 +23,7 @@
             <header>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-                    <a class="navbar-brand" href="#">Sistema de Almacen</a>
+                    <a class="navbar-brand" href="#">Sistema de Ventas</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -68,7 +68,7 @@
             <footer class="footer">
                 <div class="container">
                     <hr />
-                    <p>&copy; <%: DateTime.Now.Year %> - Sistema de Almacen</p>
+                    <p>&copy; <%: DateTime.Now.Year %> - Sistema de Ventas</p>
                 </div>
             </footer>
         </div>

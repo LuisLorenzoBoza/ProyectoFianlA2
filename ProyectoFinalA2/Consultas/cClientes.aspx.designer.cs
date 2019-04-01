@@ -10,43 +10,7 @@
 namespace ProyectoFinalA2.Consultas {
     
     
-    public partial class cUsuarios {
-        
-        /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-        
-        /// <summary>
-        /// TextBoxFechaInicial control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFechaInicial;
-        
-        /// <summary>
-        /// Label2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
-        /// TextBoxFechaFinal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFechaFinal;
+    public partial class cClientes {
         
         /// <summary>
         /// DropDownListFiltro control.
@@ -76,13 +40,13 @@ namespace ProyectoFinalA2.Consultas {
         protected global::System.Web.UI.WebControls.LinkButton BuscarLinkButton;
         
         /// <summary>
-        /// UsuarioGridView control.
+        /// ClienteGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView UsuarioGridView;
+        protected global::System.Web.UI.WebControls.GridView ClienteGridView;
         
         /// <summary>
         /// ButtonImprimir control.
@@ -94,21 +58,21 @@ namespace ProyectoFinalA2.Consultas {
         protected global::System.Web.UI.WebControls.Button ButtonImprimir;
         
         /// <summary>
-        /// ScriptManager2 control.
+        /// ScriptManager1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager2;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// UsuariosReportViewer control.
+        /// ClientesReportViewer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Microsoft.Reporting.WebForms.ReportViewer UsuariosReportViewer;
+        protected global::Microsoft.Reporting.WebForms.ReportViewer ClientesReportViewer;
     }
 }
