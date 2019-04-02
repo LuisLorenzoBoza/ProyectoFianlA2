@@ -1,4 +1,4 @@
-﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"CodeBehind="cProductos.aspx.cs" Inherits="ProyectoFinalA2.Consultas.cArticulos" %>
+﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"CodeBehind="cProductos.aspx.cs" Inherits="ProyectoFinalA2.Consultas.cProductos" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
@@ -13,89 +13,91 @@
 
         <hr style="color: #358CCE" />
 
-        <div class="form-group row justify-content-center">
-            <div class="col-lg-4">
-                <asp:Label ID="Label1" runat="server" Text="Fecha-inicio">Desde:</asp:Label>
-                <asp:TextBox ID="TextBoxFechaInicial" CssClass="form-control" TextMode="Date" runat="server"></asp:TextBox>
-            </div>
-            <div class="col-lg-2"></div>
-            <div class="col-lg-4">
-                <asp:Label ID="Label2" runat="server" Text="Fecha-inicial">Hasta:</asp:Label>
-                <asp:TextBox ID="TextBoxFechaFinal" CssClass="form-control" TextMode="Date" runat="server"></asp:TextBox>
-            </div>
-        </div>
-
-        <div>
-            <div class="form-group">
-                <div class="row justify-content-center">
-                    <div class="col-md-2">
-                        <label for="DropDownListFiltro">Filtro:</label>
-                        <asp:DropDownList ID="DropDownListFiltro" CssClass="form-control" runat="server">
-                            <asp:ListItem></asp:ListItem>
-                            <asp:ListItem>ArticulosId</asp:ListItem>
-                            <asp:ListItem>NombreArticulo</asp:ListItem>
-                            <asp:ListItem>Existencia</asp:ListItem>
-                            <asp:ListItem>Costo</asp:ListItem>
-                            <asp:ListItem>Precio</asp:ListItem>
+       <%--Entradas de las consulta--%>
+        <div class="form-group">
+                <div class="col-md-4">
+                        <asp:DropDownList ID="FiltroDropDownList" runat="server" Class="form-control input-sm" style="font-size:medium">
+                                <asp:ListItem Selected="True">Todo</asp:ListItem>
+                                <asp:ListItem>ProductoId</asp:ListItem>
+                                <asp:ListItem>Nombre</asp:ListItem>
+                                <asp:ListItem>Tipo</asp:ListItem>
+                                <asp:ListItem>Precio</asp:ListItem>
+                                <asp:ListItem>Descripcion</asp:ListItem>
+                                <asp:ListItem>Fecha</asp:ListItem>
                         </asp:DropDownList>
-                    </div>
-                    <div class="col-lg-1"></div>
-                    <div class="col-lg-4">
-                        <label for="TextBoxBuscar">Buscar:</label>
-                        <asp:TextBox ID="TextBoxBuscar" CssClass="form-control" runat="server"></asp:TextBox>
-                    </div>
-                    <div style="margin-top: 7px;" class="col-lg-1 p-0">
-                        <asp:LinkButton ID="BuscarLinkButton" CssClass="btn btn-primary mt-4" runat="server" OnClick="BuscarLinkButton_Click">
-                        <span class="fas fa-search"></span>
-                        Buscar
-                        </asp:LinkButton>
-                    </div>
                 </div>
-
-                <div class="row justify-content-center mt-3">
-                    <div class="col-lg-11">
-                        <asp:GridView ID="ArticuloGridView" runat="server" AllowPaging="true" PageSize="7" CssClass="table table-striped table-hover table-responsive-lg" OnPageIndexChanging="ArticuloGridView_PageIndexChanging" AutoGenerateColumns="False" OnSelectedIndexChanged="ArticuloGridView_SelectedIndexChanged">
-                            <HeaderStyle BackColor="#337ab7" Font-Bold="True" ForeColor="White" />
-                            <Columns>
-                                <asp:BoundField DataField="IdArticulos" HeaderText="ArticulosId" />
-                                <asp:BoundField DataField="Nombre" HeaderText="NombreArticulo" />
-                                <asp:BoundField DataField="Existencia" HeaderText="Existencia" />
-                                <asp:BoundField DataField="FechaDeVencimiento" HeaderText="Fecha" />
-                                <asp:BoundField DataField="Costo" HeaderText="Costo" />
-                                <asp:BoundField DataField="Precio" HeaderText="Precio" />
-                            </Columns>
-                        </asp:GridView>
-                    </div>
+                <div class="col-md-6">
+                     <asp:TextBox ID="CriterioTextBox" runat="server" class="form-control input-sm" style="font-size:medium"></asp:TextBox>
                 </div>
-
-                <div class="btn-block text-center">
-                    <asp:Button CssClass="btn btn-primary" ID="ButtonImprimir" runat="server" Text="Imprimir" OnClick="ButtonImprimir_Click"/>
+                <div class="col-md-2">
+                    <asp:Button ID="BuscarButton" runat="server" Text="Buscar" class="btn btn-info btn-md" OnClick="BuscarButton_Click"/>
                 </div>
+            </div>
+         <br/>
+         <br/>
 
-                <div class="modal fade bd-example-modal-lg" id="ReporteModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Imprimir</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="div1">
-                                    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                                    <rsweb:ReportViewer ID="ArticulosReportViewer" width="100%" runat="server">
-                                        <ServerReport ReportPath=""  ReportServerUrl=""/>
-                                    </rsweb:ReportViewer>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                            </div>
-                        </div>
+         <%--Fechas para consulta--%>
+        <div class="form-group">
+            <div class="col-md-12">
+                    <label for="DesdeTextBox" class="col-md-1 control-label input-sm" style="font-size: medium">Desde</label>
+                    <div class="col-md-4">
+                        <asp:TextBox ID="DesdeTextBox" TextMode="Date" runat="server" class="form-control input-sm" Style="font-size: medium" Visible="true" ></asp:TextBox>
                     </div>
+
+                    <label for="HastaTextBox" class="col-md-1 control-label input-sm" style="font-size: medium">Hasta</label>
+                    <div class="col-md-4">
+                        <asp:TextBox ID="HastaTextBox" TextMode="Date" runat="server" class="form-control input-sm" Style="font-size: medium" Visible="true" ></asp:TextBox>
+                    </div>
+                    <asp:CheckBox ID="FechaCheckBox" runat="server" Checked="True" Visible="False"  />
+            </div>
+         </div>
+        <br/>
+        <br/>
+        <%--Grid--%>
+        <div class="table-responsive">
+            <asp:GridView ID="DatosGridView" runat="server" class="table table-condensed  table-responsive" CellPadding="6" ForeColor="#333333" GridLines="None">
+                <AlternatingRowStyle BackColor="White" />
+                    <Columns>
+                        <asp:HyperLinkField ControlStyle-ForeColor="#FF9021"
+                            HeaderText="Opciones"
+                            DataNavigateUrlFields="ProductoId"
+                            DataNavigateUrlFormatString="/Registros/rProductos.aspx?Id={0}"
+                            Text="Editar">
+                        </asp:HyperLinkField>
+                    </Columns>
+                    <HeaderStyle BackColor="#FF9021" Font-Bold="true" ForeColor="White" />
+                    <RowStyle BackColor="#EFF3FB" />
+            </asp:GridView>
+       <!--Button--->
+        <div class="panel">
+            <div class="text-center">
+                <div class="form-group" style="display: inline-block">
+                    <button type="button" class="btn btn-warning mt-4" data-toggle="modal" data-target=".bd-example-modal-lg">Imprimir</button>
                 </div>
             </div>
         </div>
+    <%-- El  Modal para el Reporte--%>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="max-width: 600px!important; min-width: 600px!important">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLebel">Reporte de Ventas</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                 </div>
+                   <div class="modal-body">
+                    <%--Viewer--%>
+                    <rsweb:ReportViewer ID="CombosReportViewer" runat="server" ProcessingMode="Remote" Height="542px" Width="549px">
+                        <ServerReport ReportPath="" ReportServerUrl="" />
+                    </rsweb:ReportViewer>
+                  </div>
+                <div class="modal-footer">
+                 </div>
+             </div>
+         </div>
+     </div>
+   </div>
     </div>
 
 

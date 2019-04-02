@@ -17,7 +17,7 @@ namespace ProyectoFinalA2.Registros
         {
             if (!Page.IsPostBack)
             {
-                int id = Utiles.ToInt(Request.QueryString["id"]);
+                int id = Utils.ToInt(Request.QueryString["id"]);
                 if (id > 0)
                 {
                     RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
@@ -25,7 +25,7 @@ namespace ProyectoFinalA2.Registros
 
                     if (registro == null)
                     {
-                        Utiles.ShowToastr(this.Page, "Registro no encontrado", "Error", "error");
+                        Utils.ShowToastr(this.Page, "Registro no encontrado", "Error", "error");
                     }
                     else
                     {
@@ -34,6 +34,7 @@ namespace ProyectoFinalA2.Registros
                 }
             }
         }
+
 
         protected void Limpiar()
         {
@@ -46,7 +47,7 @@ namespace ProyectoFinalA2.Registros
 
         protected Usuarios LlenaClase(Usuarios usuarios)
         {
-            usuarios.UsuarioId = Utiles.ToInt(UsuarioIdTextBox.Text);
+            usuarios.UsuarioId = Utils.ToInt(UsuarioIdTextBox.Text);
             usuarios.Nombres = NombresTextBox.Text;
             usuarios.NombreUsuario = NombreUsuarioTextBox.Text;
             usuarios.Contraseña = ContraseñaTextBox.Text;
@@ -79,13 +80,14 @@ namespace ProyectoFinalA2.Registros
             {
                 if (usuarios.NombreUsuario == item.NombreUsuario)
                 {
-                    Utiles.ShowToastr(this.Page, "Usuario ya Existe", "Error", "error");
+                    Utils.ShowToastr(this.Page, "Usuario ya Existe", "Error", "error");
                     return validar = true;
                 }
             }
             return validar;
         }
 
+        
         
 
         protected void NuevoButton_Click(object sender, EventArgs e)
@@ -101,7 +103,7 @@ namespace ProyectoFinalA2.Registros
 
             if (IsValid == false)
             {
-                Utiles.ShowToastr(this.Page, "Revisar todos los campo", "Error", "error");
+                Utils.ShowToastr(this.Page, "Revisar todos los campo", "Error", "error");
                 return;
             }
             usuario = LlenaClase(usuario);
@@ -116,13 +118,13 @@ namespace ProyectoFinalA2.Registros
                 {
 
                     paso = repositorio.Guardar(usuario);
-                    Utiles.ShowToastr(this.Page, "Guardado con exito!!", "Guardado", "success");
+                    Utils.ShowToastr(this.Page, "Guardado con exito!!", "Guardado", "success");
                     Limpiar();
                 }
                 else
                 {
                     paso = repositorio.Modificar(usuario);
-                    Utiles.ShowToastr(this.Page, "Modificado con exito!!", "Modificado", "success");
+                    Utils.ShowToastr(this.Page, "Modificado con exito!!", "Modificado", "success");
                     Limpiar();
                 }
             }
@@ -134,27 +136,27 @@ namespace ProyectoFinalA2.Registros
             RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
             if (repositorio.Eliminar(id))
             {
-                Utiles.ShowToastr(this.Page, "Eliminado con exito!!", "Eliminado", "info");
+                Utils.ShowToastr(this.Page, "Eliminado con exito!!", "Eliminado", "info");
             }
             else
-                Utiles.ShowToastr(this.Page, "Fallo al Eliminar :(", "Error", "error");
+                Utils.ShowToastr(this.Page, "Fallo al Eliminar :(", "Error", "error");
             Limpiar();
         }
 
         protected void BuscarButton_Click(object sender, EventArgs e)
         {
             RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
-            var usuario = repositorio.Buscar(Utiles.ToInt(UsuarioIdTextBox.Text));
+            var usuario = repositorio.Buscar(Utils.ToInt(UsuarioIdTextBox.Text));
 
             if (usuario != null)
             {
                 Limpiar();
                 LlenaCampos(usuario);
-                Utiles.ShowToastr(this, "Busqueda exitosa", "Exito", "success");
+                Utils.ShowToastr(this, "Busqueda exitosa", "Exito", "success");
             }
             else
             {
-                Utiles.ShowToastr(this.Page, "El usuario que intenta buscar no existe", "Error", "error");
+                Utils.ShowToastr(this.Page, "El usuario que intenta buscar no existe", "Error", "error");
                 Limpiar();
             }
         }

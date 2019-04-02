@@ -22,11 +22,11 @@ namespace BLL
                     {
 
                     }
-                    ventas.DetalleCombo.Count();
-                    foreach (var item in ventas.DetalleCombo)
-                    {
+                    //ventas.DetalleCombo.Count();
+                    //foreach (var item in ventas.DetalleCombo)
+                    //{
 
-                    }
+                    //}
                 }
                 _contexto.Dispose();
 

@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 
 namespace ProyectoFinalA2.Consultas
 {
-    public partial class cFacturas : System.Web.UI.Page
+    public partial class cVentas : System.Web.UI.Page
     {
         
         protected void Page_Load(object sender, EventArgs e)
@@ -58,14 +58,7 @@ namespace ProyectoFinalA2.Consultas
         }
 
 
-        protected void ButtonImprimir_Click(object sender, EventArgs e)
-        {
-            Filtrar();
-            FacturasReportViewer.LocalReport.DataSources.Clear();
-            FacturasReportViewer.LocalReport.DataSources.Add(new ReportDataSource("Facturas", repositorio.GetList(filter)));
-            FacturasReportViewer.LocalReport.Refresh();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "ReporteModal", "$('#ReporteModal').modal();", true);
-        }
+        
 
         
 

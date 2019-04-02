@@ -10,7 +10,7 @@
 namespace ProyectoFinalA2.Consultas {
     
     
-    public partial class cFacturas {
+    public partial class cVentas {
         
         /// <summary>
         /// FiltroDropDownList control.
