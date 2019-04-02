@@ -15,16 +15,16 @@ namespace Entidades
         public String Password { get; set; }
         public DateTime Fecha { get; set; }
         public String Nombre { get; set; }
-        public String Comentario { get; set; }
+        
 
-        public Usuarios(int idUsuario, string username, string password, DateTime fecha, string nombre, string comentario)
+        public Usuarios(int idUsuario, string username, string password, DateTime fecha, string nombre)
         {
             IdUsuario = idUsuario;
             Username = username;
             Password = password;
             Fecha = fecha;
             Nombre = nombre;
-            Comentario = comentario;
+            
         }
 
         public Usuarios()
@@ -34,7 +34,7 @@ namespace Entidades
             Password = String.Empty;
             Fecha = DateTime.Now;
             Nombre = String.Empty;
-            Comentario = String.Empty;
+            
         }
     }
 }

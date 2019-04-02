@@ -13,9 +13,9 @@ namespace ProyectoFinalA2.Consultas
 {
     public partial class cArticulos : System.Web.UI.Page
     {
-        BLL.RepositorioBase<Articulos> repositorio = new BLL.RepositorioBase<Articulos>();
+        BLL.RepositorioBase<Productos> repositorio = new BLL.RepositorioBase<Productos>();
 
-        Expression<Func<Articulos, bool>> filtro = x => true;
+        Expression<Func<Productos, bool>> filtro = x => true;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -56,7 +56,7 @@ namespace ProyectoFinalA2.Consultas
 
                 case 1://ArticulosID
                     id = int.Parse(TextBoxBuscar.Text);
-                    filtro = (x => x.IdArticulos == id);
+                    filtro = (x => x.IdProductos == id);
                     break;
 
                 case 2://Nombre Articulo
@@ -92,7 +92,7 @@ namespace ProyectoFinalA2.Consultas
 
         protected void ArticuloGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            RepositorioBase<Articulos> rep = new RepositorioBase<Articulos>();
+            RepositorioBase<Productos> rep = new RepositorioBase<Productos>();
             ArticuloGridView.DataSource = rep.GetList(filtro);
             ArticuloGridView.PageIndex = e.NewPageIndex;
             ArticuloGridView.DataBind();

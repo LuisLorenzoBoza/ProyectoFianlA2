@@ -33,8 +33,8 @@ namespace ProyectoFinalA2.Registros
 
         protected void ButtonBuscar_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Articulos> ArtRepository = new RepositorioBase<Articulos>();
-            Articulos articulos = ArtRepository.Buscar(int.Parse(TextBoxArticuloID.Text));
+            RepositorioBase<Productos> ArtRepository = new RepositorioBase<Productos>();
+            Productos articulos = ArtRepository.Buscar(int.Parse(TextBoxArticuloID.Text));
 
             if (articulos != null)
             {
@@ -47,7 +47,7 @@ namespace ProyectoFinalA2.Registros
             }
         }
 
-        private void LlenarCampos(Articulos articulos)
+        private void LlenarCampos(Productos articulos)
         {
             DropDownListCategorias.Text = articulos.IdCategorias.ToString();
             TextBoxNombreArticulo.Text = articulos.Nombre;
@@ -78,7 +78,7 @@ namespace ProyectoFinalA2.Registros
         {
             if (Page.IsValid)
             {
-                RepositorioBase<Articulos> rb = new RepositorioBase<Articulos>();
+                RepositorioBase<Productos> rb = new RepositorioBase<Productos>();
 
                 double.TryParse(TextBoxCosto.Text, out double costo);
                 double.TryParse(TextBoxPrecio.Text, out double precio);
@@ -117,10 +117,10 @@ namespace ProyectoFinalA2.Registros
             return id;
         }
 
-        private Articulos LlenaClase()
+        private Productos LlenaClase()
         {
             int id = 0;
-            return new Articulos(
+            return new Productos(
                     ComprobarID(id),
                     int.Parse(DropDownListCategorias.SelectedValue),
                     TextBoxNombreArticulo.Text,
@@ -133,8 +133,8 @@ namespace ProyectoFinalA2.Registros
 
         protected void ButtonEliminar_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Articulos> ArtRepositorio = new RepositorioBase<Articulos>();
-            Articulos articulos = ArtRepositorio.Buscar(int.Parse(TextBoxArticuloID.Text));
+            RepositorioBase<Productos> ArtRepositorio = new RepositorioBase<Productos>();
+            Productos articulos = ArtRepositorio.Buscar(int.Parse(TextBoxArticuloID.Text));
 
             int.TryParse(TextBoxArticuloID.Text, out int id);
 
