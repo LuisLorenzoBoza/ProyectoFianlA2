@@ -15,7 +15,7 @@ namespace Entidades
         public DateTime Fecha { get; set; }
 
         public virtual List<VentaProductosDetalle> DetalleProducto { get; set; }
-        //public virtual List<CombosDetalle> DetalleCombo { get; set; }
+        
 
         public Ventas()
         {
@@ -26,7 +26,7 @@ namespace Entidades
             Fecha = DateTime.Now;
 
             DetalleProducto = new List<VentaProductosDetalle>();
-            //DetalleCombo = new List<CombosDetalle>();
+            
         }
     }
 }

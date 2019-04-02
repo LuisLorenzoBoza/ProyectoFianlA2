@@ -1,10 +1,10 @@
 ﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="rVentas.aspx.cs" Inherits="ProyectoFinalA2.Registros.rVentas" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script type="text/javascript">
-</script>
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content5" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <div class="panel col-lg-12" style="background-color: #FF9021">
+        <div class="panel-heading" style="font-family: Freestyle Script; font-size: 25px; color: #ffffff">Registro de Ventas</div>
+    </div>
 
     <div class="jumbotron">
         <div class="page-header text-center">

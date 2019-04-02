@@ -132,7 +132,8 @@
     <Content Include="Resources\if_sign-add_299068.png" />
     <Content Include="Resources\if_users_61816.png" />
     <Content Include="Resources\if_window-new_3671912.png" />
-    <Content Include="Resources\pedido.jpg" />
+    <Content Include="Resources\PcJ_Buffet.jpg" />
+    <Content Include="Resources\pedido.jpg.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

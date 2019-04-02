@@ -1,16 +1,10 @@
 ﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master"AutoEventWireup="true" CodeBehind="rUsuarios.aspx.cs" Inherits="ProyectoFinalA2.Registros.rUsuarios" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-     <div class="jumbotron">
-        <div class="page-header text-center">
-            <h2 style="color: #358CCE">Registro de Usuarios</h2>
-        </div>
-
-        <hr style="color: #358CCE" />
-
-        <div class="panel-body">
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="panel" style = "background-color:#FF9021">
+        <div class="panel-heading" style="font-family:Freestyle Script; font-size:25px; color:#ffffff" >Registro de Usuarios</div>
+    </div>
+    <div class="panel-body">
         <div class="form-horizontal col-md-12" role="form">
             <%--UsuarioId--%>
             <div class="form-group">

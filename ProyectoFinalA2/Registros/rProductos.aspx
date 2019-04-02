@@ -1,15 +1,9 @@
 ﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="rProductos.aspx.cs" Inherits="ProyectoFinalA2.Registros.rProductos" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="jumbotron">
-        <div class="page-header text-center">
-            <h2 style="color: #358CCE">Registro de Productos</h2>
+        <div class="panel" style = "background-color:#FF9021">
+           <div class="panel-heading" style="font-family:Freestyle Script; font-size:25px; color:#ffffff" >Registro de Productos</div>
         </div>
-
-        <hr style="color: #358CCE"/>
-
         <div class="panel-body">
          <div class="form-horizontal col-md-12" role="form">
             <%--Producto Id--%>
@@ -36,11 +30,12 @@
                 <label for="TipoProductoDropDownList" class="col-md-3 control-label input-sm" style="font-size:medium">Tipo de producto</label>
                 <div class="col-md-6">
                     <asp:DropDownList ID="TipoProductoDropDownList" runat="server" Class="form-control input-sm" style="font-size:medium" >
-                        <asp:ListItem Selected="True">Carne de Res</asp:ListItem>
-                        <asp:ListItem>Filete de pollo</asp:ListItem>
-                        <asp:ListItem>Papas Fritas</asp:ListItem>
-                        <asp:ListItem>Soda</asp:ListItem>
-                        <asp:ListItem>Helado</asp:ListItem>
+                        <asp:ListItem Selected="True">Costillas</asp:ListItem>
+                        <asp:ListItem>Yuca</asp:ListItem>
+                        <asp:ListItem>Amarillos</asp:ListItem>
+                        <asp:ListItem>Coca-cola</asp:ListItem>
+                        <asp:ListItem>Cervesas</asp:ListItem>
+                        <asp:ListItem>Tostones</asp:ListItem>
                     </asp:DropDownList>
                 </div>
              </div>
@@ -58,10 +53,10 @@
                     <label for="DescripcionDropDownList" class="col-md-3 control-label input-sm" style="font-size:medium">Descripcion</label>
                     <div class="col-md-6">
                         <asp:DropDownList ID="DescripcionDropDownList" runat="server" Class="form-control input-sm" style="font-size:medium" >
-                            <asp:ListItem Selected="True">A la parrilla</asp:ListItem>
-                            <asp:ListItem>Fritos</asp:ListItem>
+                            <asp:ListItem>Costillas</asp:ListItem>
                             <asp:ListItem>Bebidas</asp:ListItem>
                             <asp:ListItem>Postres</asp:ListItem>
+                            <asp:ListItem>Chivo</asp:ListItem>
                         </asp:DropDownList>
                     </div>
               </div>
@@ -84,5 +79,5 @@
               </div>
              </div>
      </div>
-    </div>
+    
 </asp:Content>

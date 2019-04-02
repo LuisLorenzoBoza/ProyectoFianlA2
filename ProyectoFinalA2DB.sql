@@ -1,83 +1,85 @@
 create database ProyectoFinalA2Db
 go
+
 use ProyectoFinalA2Db
 go
+
+
 
 Create Table Usuarios
 (
 	IdUsuario int primary key identity(1,1),
-	Username varchar(30),
-	Password varchar(8),
+	Nombres varchar(max),
+	Contraseña varchar(10),
 	Fecha date,
-	Nombre varchar(max),
-	Comentario varchar(max)
+	NombreUsuario varchar(max),
+	TipoUsuario varchar(10)
+
 );
 
 set dateformat dmy;
-insert into Usuarios values('Luis','123','root','02/04/2019','Developer')
+insert into Usuarios values('Luis Lorenzo','123','04/02/2019','Luiso','Admin')
 
 select * from Usuarios
 go
 
-Create Table Articulos
+Create Table Productos
 (
-	IdArticulos int primary key identity(1,1),
-	IdCategorias int,
-	NombreArticulo varchar(max),
-	Existencia int,
-	Precio money
+	ProductoId int primary key identity(1,1),
+    NombreProducto varchar(max),
+	Precio money,
+	Descripcion varchar(15),
+	Fecha date
 );
 
-select * from Articulos
+select * from Productos
 go
 
 
 
-create table Clientes 
+create table ProductosDetalle
 (
-	IdCliente int primary key identity(1,1),
-	Nombre varchar(30),
-	Telefono varchar(15),
-	Email varchar(15)
+	ProductosDetalleId int primary key identity(1,1),
+	ProductoId int,
+	NombreProducto varchar(30),
+	Precio money,
+	Descripcion varchar(30)
 );
 
-select * from Clientes
+select * from ProductosDetalle
 go
 
-create table Facturas
+create table Ventas
 (
-	IdFactura int primary key identity(1,1),
-	IdCliente int,
-	IdUsuario int,
+	VentaId int primary key identity(1,1),
+	TotalAPagar money,
+	Efectivo money,
 	Devuelta money,
-	EfectivoRecibido money,
-	Fecha date,
-	Monto money,
-	Observacion varchar(max),
-	Cantidad money,
+	Fecha date
 	
 );
 
-select * from Facturas
+select * from Ventas
 go
 
-create table FacturaDetalles
+create table VentaProductosDetalles
 (
-	Id int primary key identity(1,1),
-	FacturaId int,
-	IdArt int,
-	Cantidad int,
-	NombreArticulo varchar(30),
-	Precio money,
-	Importe money
+	VentaProductosDetallesId int primary key identity(1,1),
+	VentaId int,
+	NombreProducto varchar(30),
+	Precio money, 
+	Descripcion varchar(30)
 
-)
+);
 
-truncate table FacturaDetalle
-
-select *from FacturaDetalles
-select * from facturas
-
-
-
+select * from VentaProductosDetalles
 go
+
+--truncate table VentaProductosDetalles
+
+--select *from FacturaDetalles
+--select * from facturas
+
+
+
+

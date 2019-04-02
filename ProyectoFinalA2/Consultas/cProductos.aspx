@@ -1,17 +1,11 @@
 ﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"CodeBehind="cProductos.aspx.cs" Inherits="ProyectoFinalA2.Consultas.cProductos" %>
 
-<%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-     <div class="jumbotron">
-        <div class="page-header text-center">
-            <h2 style="color: #358CCE">Consulta de Productos</h2>
-        </div>
-
-        <hr style="color: #358CCE" />
+<asp:Content ID="Content7" ContentPlaceHolderID="MainContent" runat="server">
+      <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+     <div class="panel" style = "background-color:#FF9021">
+           <div class="panel-heading" style="font-family:Freestyle Script; font-size:25px; color:#ffffff" >Consulta de Productos</div>
+     </div>
 
        <%--Entradas de las consulta--%>
         <div class="form-group">
