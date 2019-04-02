@@ -10,7 +10,7 @@
 namespace ProyectoFinalA2.Registros {
     
     
-    public partial class rArticulosaspx {
+    public partial class rArticulos {
         
         /// <summary>
         /// TextBoxArticuloID control.

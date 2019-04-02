@@ -100,7 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Consultas\cArticulos.aspx" />
-    <Content Include="Consultas\cClientes.aspx" />
     <Content Include="Consultas\cFacturas.aspx" />
     <Content Include="Consultas\cUsuarios.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -110,9 +109,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Default.aspx" />
-    <Content Include="ProyectoFinalA2.sql" />
     <Content Include="Registros\rArticulos.aspx" />
-    <Content Include="Registros\rClientes.aspx" />
     <Content Include="Registros\rFacturas.aspx" />
     <Content Include="Registros\rUsuarios.aspx" />
     <Content Include="Resources\iconfinder_bill_416404.png" />
@@ -145,7 +142,6 @@
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
     <Content Include="Scripts\fieldset.css" />
-    <Content Include="Welcom.aspx" />
     <None Include="Scripts\jquery-1.6.3-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.3.js" />
     <Content Include="Scripts\jquery-1.6.3.min.js" />
@@ -190,13 +186,6 @@
     <Compile Include="Consultas\cArticulos.aspx.designer.cs">
       <DependentUpon>cArticulos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Consultas\cClientes.aspx.cs">
-      <DependentUpon>cClientes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Consultas\cClientes.aspx.designer.cs">
-      <DependentUpon>cClientes.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Consultas\cFacturas.aspx.cs">
       <DependentUpon>cFacturas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -225,13 +214,6 @@
     </Compile>
     <Compile Include="Registros\rArticulos.aspx.designer.cs">
       <DependentUpon>rArticulos.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Registros\rClientes.aspx.cs">
-      <DependentUpon>rClientes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Registros\rClientes.aspx.designer.cs">
-      <DependentUpon>rClientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Registros\rFacturas.aspx.cs">
       <DependentUpon>rFacturas.aspx</DependentUpon>
@@ -262,13 +244,7 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="Welcom.aspx.cs">
-      <DependentUpon>Welcom.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Welcom.aspx.designer.cs">
-      <DependentUpon>Welcom.aspx</DependentUpon>
-    </Compile>
+    <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\.DS_Store" />

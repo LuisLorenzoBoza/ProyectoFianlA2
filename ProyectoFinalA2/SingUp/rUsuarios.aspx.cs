@@ -43,7 +43,7 @@ namespace ProyectoFinalA2.SingUp
             TextBoxPassword.Text = usuario.Password;
             TextBoxFecha.Text = usuario.Fecha.ToString("yyyy-MM-dd");
             TextBoxNombre.Text = usuario.Nombre;
-            TextBoxEmail.Text = usuario.Comentario;
+           
         }
 
         protected void ButtonNuevo_Click(object sender, EventArgs e)

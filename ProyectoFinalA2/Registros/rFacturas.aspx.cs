@@ -59,8 +59,8 @@ namespace ProyectoFinalA2.Registros
             TextBoxFacturaID.Text = facturas.IdFactura.ToString();
             TextBoxClienteID.Text = facturas.IdCliente.ToString();
             // TextboxArticuloID.Text = facturas.IdArticulo.ToString();
-            RepositorioBase<Clientes> client = new RepositorioBase<Clientes>();
-            Clientes Clientes = client.Buscar(int.Parse(TextBoxClienteID.Text));
+            RepositorioBase<Productos> client = new RepositorioBase<Productos>();
+            Productos Clientes = client.Buscar(int.Parse(TextBoxClienteID.Text));
             LlenarCamposClientes(Clientes);
 
             TextBoxCantidadArticulo.Text = String.Empty;
@@ -76,8 +76,8 @@ namespace ProyectoFinalA2.Registros
 
         protected void ButtonBuscarCliente_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Clientes> client = new RepositorioBase<Clientes>();
-            Clientes Client = null;
+            RepositorioBase<Productos> client = new RepositorioBase<Productos>();
+            Productos Client = null;
             if (!TextBoxClienteID.Text.Equals(string.Empty))
             {
                 Client = client.Buscar(int.Parse(TextBoxClienteID.Text));
@@ -98,7 +98,7 @@ namespace ProyectoFinalA2.Registros
 
         protected void ButtonAgregar_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Articulos> art = new RepositorioBase<Articulos>();
+            RepositorioBase<Productos> art = new RepositorioBase<Productos>();
             FacturasDetalle facdetalle = new FacturasDetalle();
             Facturas facturas = new Facturas();
 
@@ -132,9 +132,9 @@ namespace ProyectoFinalA2.Registros
             TextBoxComentario.Text = String.Empty;
             TextBoxTotal.Text = String.Empty;
             TextBoxNombreCliente.Text = String.Empty;
-            TextBoxApellidoCliente.Text = String.Empty;
-            TextBoxTelefonoCliente.Text = String.Empty;
-            TextBoxDireccionCliente.Text = String.Empty;
+            
+            
+            
             TextBoxNombreArticulo.Text = String.Empty;
             TextBoxPrecioArticulo.Text = String.Empty;
             TextBoxCantidadArticulo.Text = String.Empty;
@@ -175,15 +175,15 @@ namespace ProyectoFinalA2.Registros
 
         private Facturas LlenaClase()
         {
-            int id = 0;
-            return new Facturas(
-                ComprobarID(id),
-                int.Parse(TextBoxClienteID.Text),
-                Convert.ToDateTime(TextBoxFecha.Text),
-                double.Parse(TextBoxTotal.Text),
-                TextBoxComentario.Text,
-                detalle
-                );
+            Facturas.Monto = Utils.ToDecimal(TextBoxTotal.Text);
+            ventas.Efectivo = Utils.ToDecimal(EfectivoTextBox.Text);
+            ventas.Devuelta = Utils.ToDecimal(DevueltaTextBox.Text);
+            bool resultado = DateTime.TryParse(FechaTextBox.Text, out DateTime date);
+            if (resultado == true)
+                ventas.Fecha = date;
+            ventas.DetalleProducto = (List<VentaProductosDetalle>)ViewState["VentaProductosDetalle"];
+            ventas.DetalleCombo = (List<CombosDetalle>)ViewState["CombosDetalle"];
+            return ventas;
         }
 
         private int ComprobarID(int id)
@@ -215,8 +215,8 @@ namespace ProyectoFinalA2.Registros
 
         protected void ButtonBuscarArticulo_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Articulos> TRA = new RepositorioBase<Articulos>();
-            Articulos articulos = null;
+            RepositorioBase<Productos> TRA = new RepositorioBase<Productos>();
+            Productos articulos = null;
 
 
             if (!TextboxArticuloID.Text.Equals(String.Empty))
@@ -235,22 +235,22 @@ namespace ProyectoFinalA2.Registros
             }
         }
 
-        private void LlenarCamposArticulos(Articulos articulos)
+        private void LlenarCamposArticulos(Productos articulos)
         {
             TextboxArticuloID.Text = articulos.IdArticulos.ToString();
             TextBoxNombreArticulo.Text = articulos.NombreArticulo.ToString();
             TextBoxPrecioArticulo.Text = articulos.Precio.ToString();
-            TextBoxImporteArticulo.Text = articulos.Costo.ToString();
+            
 
         }
 
-        private void LlenarCamposClientes(Clientes clientes)
+        private void LlenarCamposClientes(Productos clientes)
         {
             TextBoxClienteID.Text = clientes.IdCliente.ToString();
             TextBoxNombreCliente.Text = clientes.Nombre.ToString();
-            TextBoxApellidoCliente.Text = clientes.Apellido.ToString();
-            TextBoxTelefonoCliente.Text = clientes.Telefono.ToString();
-            TextBoxDireccionCliente.Text = clientes.Direccion.ToString();
+            
+           
+            
 
         }
 

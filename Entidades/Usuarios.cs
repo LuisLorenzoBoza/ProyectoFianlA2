@@ -1,40 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entidades
 {
+    [Serializable]
     public class Usuarios
     {
         [Key]
-        public int IdUsuario { get; set; }
-        public String Username { get; set; }
-        public String Password { get; set; }
+        public int UsuarioId { get; set; }
+        public string Nombres { get; set; }
+        public string NombreUsuario { get; set; }
+        public string Contraseña { get; set; }
+        public string ConfirmarContraseña { get; set; }
+        public string TipoUsuario { get; set; }
         public DateTime Fecha { get; set; }
-        public String Nombre { get; set; }
-        
-
-        public Usuarios(int idUsuario, string username, string password, DateTime fecha, string nombre)
-        {
-            IdUsuario = idUsuario;
-            Username = username;
-            Password = password;
-            Fecha = fecha;
-            Nombre = nombre;
-            
-        }
 
         public Usuarios()
         {
-            IdUsuario = 0;
-            Username = String.Empty;
-            Password = String.Empty;
+            UsuarioId = 0;
+            Nombres = string.Empty;
+            NombreUsuario = string.Empty;
+            Contraseña = string.Empty;
+            ConfirmarContraseña = string.Empty;
+            TipoUsuario = string.Empty;
             Fecha = DateTime.Now;
-            Nombre = String.Empty;
-            
+        }
+
+        public Usuarios(string nombreUsuario, string contraseña)
+        {
+            NombreUsuario = nombreUsuario;
+            Contraseña = contraseña;
         }
     }
 }

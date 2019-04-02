@@ -13,9 +13,9 @@ namespace ProyectoFinalA2.Consultas
 {
     public partial class cArticulos : System.Web.UI.Page
     {
-        BLL.RepositorioBase<Articulos> repositorio = new BLL.RepositorioBase<Articulos>();
+        BLL.RepositorioBase<Productos> repositorio = new BLL.RepositorioBase<Productos>();
 
-        Expression<Func<Articulos, bool>> filtro = x => true;
+        Expression<Func<Productos, bool>> filtro = x => true;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -60,22 +60,19 @@ namespace ProyectoFinalA2.Consultas
                     break;
 
                 case 2://Nombre Articulo
-                    filtro = (x => x.NombreArticulo.Contains(TextBoxBuscar.Text) && ((x.FechaDeVencimiento >= fInicial) && (x.FechaDeVencimiento <= fFinal)));
+                    filtro = (x => x.NombreArticulo.Contains(TextBoxBuscar.Text) && ((x.Fecha >= fInicial) && (x.Fecha <= fFinal)));
                     break;
 
                 case 3://Existencia
                     id = int.Parse(TextBoxBuscar.Text);
-                    filtro = (x => x.Existencia == id && x.FechaDeVencimiento >= fInicial && x.FechaDeVencimiento <= fFinal);
+                    filtro = (x => x.Existencia == id && x.Fecha >= fInicial && x.Fecha <= fFinal);
                     break;
 
-                case 4://Costo
-                    id = int.Parse(TextBoxBuscar.Text);
-                    filtro = (x => x.Costo == id && x.FechaDeVencimiento >= fInicial && x.FechaDeVencimiento <= fFinal);
-                    break;
+                
 
-                case 5://Precio
+                case 4://Precio
                     id = int.Parse(TextBoxBuscar.Text);
-                    filtro = (x => x.Precio == id && x.FechaDeVencimiento >= fInicial && x.FechaDeVencimiento <= fFinal);
+                    filtro = (x => x.Precio == id && x.Fecha >= fInicial && x.Fecha <= fFinal);
                     break;
 
             }
@@ -92,7 +89,7 @@ namespace ProyectoFinalA2.Consultas
 
         protected void ArticuloGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            RepositorioBase<Articulos> rep = new RepositorioBase<Articulos>();
+            RepositorioBase<Productos> rep = new RepositorioBase<Productos>();
             ArticuloGridView.DataSource = rep.GetList(filtro);
             ArticuloGridView.PageIndex = e.NewPageIndex;
             ArticuloGridView.DataBind();

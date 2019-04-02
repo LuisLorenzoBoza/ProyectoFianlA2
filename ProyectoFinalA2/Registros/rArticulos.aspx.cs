@@ -10,31 +10,23 @@ using System.Web.UI.WebControls;
 
 namespace ProyectoFinalA2.Registros
 {
-    public partial class rArticulosaspx : System.Web.UI.Page
+    public partial class rArticulos : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                ListCategorias();
+               
             }
             TextBoxFechaVencimiento.Text = DateTime.Now.ToString("yyyy-MM-dd");
         }
 
-        private void ListCategorias()
-        {
-            RepositorioBase<Categorias> rep = new RepositorioBase<Categorias>();
-            DropDownListCategorias.DataSource = rep.GetList(x => true);
-            DropDownListCategorias.DataValueField = "CategoriaId";
-            DropDownListCategorias.DataTextField = "NombreCategoria";
-            DropDownListCategorias.DataBind();
-            DropDownListCategorias.Items.Insert(0, new ListItem("", ""));
-        }
+        
 
         protected void ButtonBuscar_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Articulos> ArtRepository = new RepositorioBase<Articulos>();
-            Articulos articulos = ArtRepository.Buscar(int.Parse(TextBoxArticuloID.Text));
+            RepositorioBase<Productos> ArtRepository = new RepositorioBase<Productos>();
+            Productos articulos = ArtRepository.Buscar(int.Parse(TextBoxArticuloID.Text));
 
             if (articulos != null)
             {
@@ -47,12 +39,12 @@ namespace ProyectoFinalA2.Registros
             }
         }
 
-        private void LlenarCampos(Articulos articulos)
+        private void LlenarCampos(Productos articulos)
         {
-            DropDownListCategorias.Text = articulos.IdCategorias.ToString();
+           
             TextBoxNombreArticulo.Text = articulos.NombreArticulo;
-            TextBoxFechaVencimiento.Text = articulos.FechaDeVencimiento.ToString("yyyy-MM-dd");
-            TextBoxCosto.Text = articulos.Costo.ToString();
+            
+            
             TextBoxExistencia.Text = articulos.Existencia.ToString();
             TextBoxPrecio.Text = articulos.Precio.ToString();
         }
@@ -66,10 +58,10 @@ namespace ProyectoFinalA2.Registros
         private void ClearAll()
         {
             TextBoxArticuloID.Text = String.Empty;
-            DropDownListCategorias.Text = String.Empty;
+            
             TextBoxNombreArticulo.Text = String.Empty;
-            TextBoxFechaVencimiento.Text = String.Empty;
-            TextBoxCosto.Text = String.Empty;
+            
+            
             TextBoxExistencia.Text = String.Empty;
             TextBoxPrecio.Text = String.Empty;
         }
@@ -78,14 +70,14 @@ namespace ProyectoFinalA2.Registros
         {
             if (Page.IsValid)
             {
-                RepositorioBase<Articulos> rb = new RepositorioBase<Articulos>();
+                RepositorioBase<Productos> rb = new RepositorioBase<Productos>();
 
-                double.TryParse(TextBoxCosto.Text, out double costo);
+                
                 double.TryParse(TextBoxPrecio.Text, out double precio);
 
                 int id = 0;
 
-                if (costo < precio)
+                if (precio > 0)
                 {
                     if (ComprobarID(id) == 0)
                     {
@@ -117,24 +109,27 @@ namespace ProyectoFinalA2.Registros
             return id;
         }
 
-        private Articulos LlenaClase()
+        private Productos LlenaClase()
         {
-            int id = 0;
-            return new Articulos(
+            {
+                int id = 0;
+
+                return new Productos(
                     ComprobarID(id),
-                    int.Parse(DropDownListCategorias.SelectedValue),
                     TextBoxNombreArticulo.Text,
-                    double.Parse(TextBoxPrecio.Text),
-                    int.Parse(TextBoxExistencia.Text),
-                    Convert.ToDateTime(TextBoxFechaVencimiento.Text),
-                    double.Parse(TextBoxCosto.Text)
-                );
+
+                    TextBoxExistencia.Text,
+
+                    TextBoxPrecio.Text
+                    );
+            }
+            
         }
 
         protected void ButtonEliminar_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Articulos> ArtRepositorio = new RepositorioBase<Articulos>();
-            Articulos articulos = ArtRepositorio.Buscar(int.Parse(TextBoxArticuloID.Text));
+            RepositorioBase<Productos> ArtRepositorio = new RepositorioBase<Productos>();
+            Productos articulos = ArtRepositorio.Buscar(int.Parse(TextBoxArticuloID.Text));
 
             int.TryParse(TextBoxArticuloID.Text, out int id);
 

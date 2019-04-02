@@ -49,6 +49,10 @@
                     <label for="TextBoxNombreCliente">Nombre</label>
                     <asp:TextBox class="form-control" ID="TextBoxNombreCliente" runat="server" autocomplete="off" ReadOnly="true"> </asp:TextBox>
                 </div>
+                 <div class="form-group col-md-3 col-md-offset-3">
+                    <label for="TextBoxComentario">Comentario</label>
+                    <asp:TextBox class="form-control" ID="TextBoxComentario" runat="server" autocomplete="off" ReadOnly="true"> </asp:TextBox>
+                </div>
                 
             </div>
             <div class="form-row">

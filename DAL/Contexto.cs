@@ -1,20 +1,16 @@
 ﻿using Entidades;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
     public class Contexto : DbContext
     {
-        public DbSet<Usuarios> Usuario { get; set; }
-        public DbSet<Articulos> Articulos { get; set; }
-        public DbSet<Clientes> Cliente { get; set; }
-        public DbSet<Categorias> Categoria { get; set; }
-        public DbSet<Facturas> Facturas { get; set; }
+        public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<Productos> Productos { get; set; }
+        public DbSet<ProductosDetalle> ProductosDetalle { get; set; }
+        //public DbSet<Combos> Combos { get; set; }
+        //public DbSet<CombosDetalle> CombosDetalle { get; set; }
+        public DbSet<Ventas> Ventas { get; set; }
 
         public Contexto() : base("ConStr")
         {
