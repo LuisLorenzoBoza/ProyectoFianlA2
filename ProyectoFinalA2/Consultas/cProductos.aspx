@@ -1,4 +1,4 @@
-﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"CodeBehind="cArticulos.aspx.cs" Inherits="ProyectoFinalA2.Consultas.cArticulos" %>
+﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"CodeBehind="cProductos.aspx.cs" Inherits="ProyectoFinalA2.Consultas.cArticulos" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
@@ -8,7 +8,7 @@
 
      <div class="jumbotron">
         <div class="page-header text-center">
-            <h2 style="color: #358CCE">Consulta de Articulos</h2>
+            <h2 style="color: #358CCE">Consulta de Productos</h2>
         </div>
 
         <hr style="color: #358CCE" />

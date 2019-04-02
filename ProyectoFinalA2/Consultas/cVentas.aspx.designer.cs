@@ -13,102 +13,75 @@ namespace ProyectoFinalA2.Consultas {
     public partial class cFacturas {
         
         /// <summary>
-        /// Label1 control.
+        /// FiltroDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.DropDownList FiltroDropDownList;
         
         /// <summary>
-        /// TextBoxFechaInicial control.
+        /// CriterioTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFechaInicial;
+        protected global::System.Web.UI.WebControls.TextBox CriterioTextBox;
         
         /// <summary>
-        /// Label2 control.
+        /// BuscarButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Button BuscarButton;
         
         /// <summary>
-        /// TextBoxFechaFinal control.
+        /// DesdeTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxFechaFinal;
+        protected global::System.Web.UI.WebControls.TextBox DesdeTextBox;
         
         /// <summary>
-        /// DropDownListFiltro control.
+        /// HastaTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListFiltro;
+        protected global::System.Web.UI.WebControls.TextBox HastaTextBox;
         
         /// <summary>
-        /// TextBoxBuscar control.
+        /// FechaCheckBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxBuscar;
+        protected global::System.Web.UI.WebControls.CheckBox FechaCheckBox;
         
         /// <summary>
-        /// BuscarLinkButton control.
+        /// DatosGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BuscarLinkButton;
+        protected global::System.Web.UI.WebControls.GridView DatosGridView;
         
         /// <summary>
-        /// FacturaGridView control.
+        /// CombosReportViewer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView FacturaGridView;
-        
-        /// <summary>
-        /// ButtonImprimir control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonImprimir;
-        
-        /// <summary>
-        /// ScriptManager1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
-        /// <summary>
-        /// FacturasReportViewer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Microsoft.Reporting.WebForms.ReportViewer FacturasReportViewer;
+        protected global::Microsoft.Reporting.WebForms.ReportViewer CombosReportViewer;
     }
 }

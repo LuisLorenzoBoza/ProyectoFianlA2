@@ -1,6 +1,7 @@
 ﻿using BLL;
 using Entidades;
 using Microsoft.Reporting.WebForms;
+using ProyectoFinalA2.Utiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,84 +10,85 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace ProyectoFinalA2.Consultas
 {
     public partial class cUsuarios : System.Web.UI.Page
     {
-        BLL.RepositorioBase<Usuarios> repositorio = new BLL.RepositorioBase<Usuarios>();
-
-        Expression<Func<Usuarios, bool>> filtro = x => true;
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (!Page.IsPostBack)
             {
-                TextBoxFechaInicial.Text = DateTime.Now.Date.ToString("yyyy-MM-dd");
-                TextBoxFechaFinal.Text = DateTime.Now.Date.ToString("yyyy-MM-dd");
-
-                UsuariosReportViewer.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-                UsuariosReportViewer.Reset();
-
-                UsuariosReportViewer.LocalReport.ReportPath = Server.MapPath(@"~\Reportes\ListadoUsuarios.rdlc");
-                UsuariosReportViewer.LocalReport.DataSources.Clear();
-
-                //UsuariosReportViewer.LocalReport.DataSources.Add(new ReportDataSource("Usuarios", repositorio.GetList(x => true)));
+                MetodoReporte();
             }
         }
 
-        protected void DatosGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+
+        public static List<Usuarios> MetodoBuscar(int index, string criterio, DateTime desde, DateTime hasta)
         {
-            RepositorioBase<Usuarios> rep = new RepositorioBase<Usuarios>();
-            UsuarioGridView.DataSource = rep.GetList(filtro);
-            UsuarioGridView.PageIndex = e.NewPageIndex;
-            UsuarioGridView.DataBind();
-        }
+            Expression<Func<Usuarios, bool>> filtro = p => true;
+            RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
+            List<Usuarios> list = new List<Usuarios>();
 
-        protected void BuscarLinkButton_Click(object sender, EventArgs e)
-        {
-            Filtrar();
-            RepositorioBase<Usuarios> rep = new RepositorioBase<Usuarios>();
-            UsuarioGridView.DataSource = rep.GetList(filtro);
-            UsuarioGridView.DataBind();
-        }
-
-        RepositorioBase<Usuarios> usuario = new RepositorioBase<Usuarios>();
-
-
-        private void Filtrar()
-        {
-            DateTime fInicial = DateTime.Parse(TextBoxFechaInicial.Text);
-            DateTime fFinal = DateTime.Parse(TextBoxFechaFinal.Text);
-
-            int id = 0;
-            switch (DropDownListFiltro.SelectedIndex)
+            int id = Utils.ToInt(criterio);
+            switch (index)
             {
                 case 0://Todo
-                    filtro = x => true;
+                    repositorio.GetList(c => true);
                     break;
-
-                case 1://UsuarioId
-                    id = int.Parse(TextBoxBuscar.Text);
-                    filtro = (x => x.IdUsuario == id);
+                case 1://Id
+                    filtro = p => p.UsuarioId == id && p.Fecha >= desde && p.Fecha <= hasta;
                     break;
-
-                case 2://Nombre Usuario
-                    filtro = (x => x.Username.Contains(TextBoxBuscar.Text) && ((x.Fecha >= fInicial) && (x.Fecha <= fFinal)));
+                case 2://Nombres
+                    filtro = p => p.Nombres.Contains(criterio) && p.Fecha >= desde && p.Fecha <= hasta;
                     break;
-
-                case 3://Password
-                    filtro = (x => x.Password.Contains(TextBoxBuscar.Text) && ((x.Fecha >= fInicial) && (x.Fecha <= fFinal)));
+                case 3://Usuario
+                    filtro = p => p.NombreUsuario.Contains(criterio) && p.Fecha >= desde && p.Fecha <= hasta;
+                    break;
+                case 4://Tipo
+                    filtro = p => p.TipoUsuario.Contains(criterio) && p.Fecha >= desde && p.Fecha <= hasta;
+                    break;
+                case 5://Todo por fecha
+                    filtro = p => p.Fecha >= desde && p.Fecha <= hasta;
                     break;
             }
+
+            list = repositorio.GetList(filtro);
+
+            return list;
         }
 
-        protected void ButtonImprimir_Click(object sender, EventArgs e)
+        protected void BuscarButton_Click(object sender, EventArgs e)
         {
-            Filtrar();
-            UsuariosReportViewer.LocalReport.DataSources.Clear();
-            UsuariosReportViewer.LocalReport.DataSources.Add(new ReportDataSource("Usuarios", usuario.GetList(filtro)));
-            UsuariosReportViewer.LocalReport.Refresh();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "ReporteModal", "$('#ReporteModal').modal();", true);
+            int id = Utils.ToInt(CriterioTextBox.Text);
+            int index = FiltroDropDownList.SelectedIndex;
+            DateTime desde = Utils.ToDateTime(DesdeTextBox.Text);
+            DateTime hasta = Utils.ToDateTime(HastaTextBox.Text);
+
+            DatosGridView.DataSource = MetodoBuscar(index, CriterioTextBox.Text, desde, hasta);
+            DatosGridView.DataBind();
+        }
+
+        public static List<Usuarios> Lista(Expression<Func<Usuarios, bool>> Filtro)
+        {
+            Filtro = r => true;
+            RepositorioBase<Usuarios> Repositorio = new RepositorioBase<Usuarios>();
+            List<Usuarios> usuarios = new List<Usuarios>();
+            usuarios = Repositorio.GetList(Filtro);
+            return usuarios;
+        }
+
+        public void MetodoReporte()
+        {
+            Expression<Func<Usuarios, bool>> Filtra = r => true;
+            CombosReportViewer.ProcessingMode = ProcessingMode.Local;
+            CombosReportViewer.Reset();
+            CombosReportViewer.LocalReport.ReportPath = Server.MapPath(@"~\Reportes\Report_Usuarios.rdlc");
+            CombosReportViewer.LocalReport.DataSources.Clear();
+            CombosReportViewer.LocalReport.DataSources.Add(new ReportDataSource("Usuarios", Lista(Filtra)));
+            CombosReportViewer.LocalReport.Refresh();
         }
     }
 }

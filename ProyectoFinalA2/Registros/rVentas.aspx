@@ -1,4 +1,4 @@
-﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="rFacturas.aspx.cs" Inherits="ProyectoFinalA2.Registros.rFacturas" %>
+﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="rVentas.aspx.cs" Inherits="ProyectoFinalA2.Registros.rVentas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
@@ -8,7 +8,7 @@
 
     <div class="jumbotron">
         <div class="page-header text-center">
-            <h2 style="color: #358CCE">Registro de Facturas</h2>
+            <h2 style="color: #358CCE">Registro de Ventas</h2>
         </div>
 
         <hr style="color: #358CCE" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 
-namespace ProyectoFinalA2.Utils
+namespace ProyectoFinalA2.Utiles
 {
     public static class Utils
     {

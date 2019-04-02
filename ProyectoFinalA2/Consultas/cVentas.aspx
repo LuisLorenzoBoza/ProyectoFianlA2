@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="cUsuarios.aspx.cs" Inherits="ProyectoFinalA2.Consultas.cUsuarios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="cVentas.aspx.cs" Inherits="ProyectoFinalA2.Consultas.cFacturas" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
@@ -8,7 +8,7 @@
 
     <div class="jumbotron">
         <div class="page-header text-center">
-            <h2 style="color: #358CCE">Consulta de Usuarios</h2>
+            <h2 style="color: #358CCE">Consulta de Ventas</h2>
         </div>
 
         <hr style="color: #358CCE" />
@@ -18,10 +18,9 @@
                 <div class="col-md-4">
                         <asp:DropDownList ID="FiltroDropDownList" runat="server" Class="form-control input-sm" style="font-size:medium">
                                 <asp:ListItem Selected="True">Todo</asp:ListItem>
-                                <asp:ListItem>UsuarioId</asp:ListItem>
-                                <asp:ListItem>Nombres</asp:ListItem>
-                                <asp:ListItem>Usuario</asp:ListItem>
-                                <asp:ListItem>Tipo</asp:ListItem>
+                                <asp:ListItem>VentaId</asp:ListItem>
+                                <asp:ListItem>Efectivo</asp:ListItem>
+                                <asp:ListItem>Devuelta</asp:ListItem>
                                 <asp:ListItem>Fecha</asp:ListItem>
                         </asp:DropDownList>
                 </div>
@@ -59,15 +58,16 @@
                     <Columns>
                         <asp:HyperLinkField ControlStyle-ForeColor="#FF9021"
                             HeaderText="Opciones"
-                            DataNavigateUrlFields="UsuarioId"
-                            DataNavigateUrlFormatString="/Registros/rUsuarios.aspx?Id={0}"
+                            DataNavigateUrlFields="VentaId"
+                            DataNavigateUrlFormatString="/Registros/rVentas.aspx?Id={0}"
                             Text="Editar">
                         </asp:HyperLinkField>
                     </Columns>
                     <HeaderStyle BackColor="#FF9021" Font-Bold="true" ForeColor="White" />
                     <RowStyle BackColor="#EFF3FB" />
-            </asp:GridView>>
-     <!--Button--->
+
+            </asp:GridView>
+       <!--Button--->
         <div class="panel">
             <div class="text-center">
                 <div class="form-group" style="display: inline-block">
@@ -87,7 +87,7 @@
                  </div>
                    <div class="modal-body">
                     <%--Viewer--%>
-                    <rsweb:ReportViewer ID="CombosReportViewer" runat="server" ProcessingMode="Remote" Height="514px" Width="552px">
+                    <rsweb:ReportViewer ID="CombosReportViewer" runat="server" ProcessingMode="Remote" Height="577px" Width="550px">
                         <ServerReport ReportPath="" ReportServerUrl="" />
                     </rsweb:ReportViewer>
                   </div>
@@ -96,6 +96,5 @@
              </div>
          </div>
      </div>
-   </div>
-</div>
+  </div>
 </asp:Content>

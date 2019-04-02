@@ -10,69 +10,80 @@
 
         <hr style="color: #358CCE" />
 
-        <label for="TextBoxUsuarioID">ID</label>
-        <div class="form-row">
-            <div class="form-group col-lg-1">
-                <asp:TextBox TextMode="Number" class="form-control" ID="TextBoxUsuarioID" runat="server" placeholder="ID"></asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="id" SetFocusOnError="true" ForeColor="Red" ID="RequiredFieldValidator7" ControlToValidate="TextBoxUsuarioID" runat="server" Display="Dynamic" ErrorMessage="Introduzca un id"></asp:RequiredFieldValidator>
+        <div class="panel-body">
+        <div class="form-horizontal col-md-12" role="form">
+            <%--UsuarioId--%>
+            <div class="form-group">
+                <label for="UsuarioIdTextBox" class="col-md-3 control-label input-sm" style="font-size:medium">Usuario Id</label>
+                <div class="col-md-1 ">
+                    <asp:TextBox ID="UsuarioIdTextBox" runat="server" placeholder="0" class="form-control input-sm" Style="font-size:medium" TextMode="Number"></asp:TextBox>                  
+                </div>
+                    <asp:RegularExpressionValidator ID="ValidaID" runat="server" ErrorMessage='Campo "Usuario Id" solo acepta numeros' ControlToValidate="UsuarioIdTextBox" ValidationExpression="^[0-9]*" Text="*" ForeColor="Red" Display="Dynamic" ToolTip="Entrada no valida" ValidationGroup="Guardar"></asp:RegularExpressionValidator>
+                <div class="col-md-1 ">
+                    <asp:Button ID="BuscarButton" runat="server" Text="Buscar" class="btn btn-info btn-sm" OnClick="BuscarButton_Click" />
+                </div>
             </div>
-            <div class="btn-group-col-md-1">
-                <asp:Button class="btn btn-primary" ValidationGroup="id" ID="ButtonBuscar" runat="server" Text="Buscar" OnClick="ButtonBuscar_Click" />
+           <%-- Nombres--%>
+            <div class="form-group">
+                <label for="NombresTextBox" class="col-md-3 control-label input-sm" style="font-size:medium">Nombres</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="NombresTextBox" runat="server" class="form-control input-sm" style="font-size:medium"></asp:TextBox>
+                </div>
+               <asp:RequiredFieldValidator ID="Valida" runat="server" ErrorMessage="El campo &quot;Nombres&quot; esta vacio" ControlToValidate="NombresTextBox" ForeColor="Red" Display="Dynamic" ToolTip="Campo Nombres es obligatorio" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-7 col-md-offset-3">
-                <label for="TextBoxUsername">Username</label>
-                <asp:TextBox class="form-control" ID="TextBoxUsername" runat="server" placeholder="Username" autocomplete="off"> </asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator1" ControlToValidate="TextBoxUsername" runat="server" Display="Dynamic" ErrorMessage="Introduzca su Username"></asp:RequiredFieldValidator>
+           <%-- Nombre Usuario--%>
+            <div class="form-group">
+                <label for="NombreUsuarioTextBox" class="col-md-3 control-label input-sm" style="font-size:medium">Nombre de usuario</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="NombreUsuarioTextBox" runat="server" class="form-control input-sm" style="font-size:medium"></asp:TextBox>
+                </div>
+               <asp:RequiredFieldValidator ID="ValidaUser" runat="server"  ControlToValidate="NombreUsuarioTextBox" ForeColor="Red" Display="Dynamic" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-7 col-md-offset-3">
-                <label for="TextBoxPassword">Password</label>
-                <asp:TextBox  class="form-control" TextMode="Password" ID="TextBoxPassword" runat="server" placeholder="Password" autocomplete="off"> </asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator2" ControlToValidate="TextBoxPassword" runat="server" Display="Dynamic" ErrorMessage="Introduzca su Password"></asp:RequiredFieldValidator>
+           <%--Contraseña--%>
+            <div class="form-group">
+                <label for="ContraseñaTextBox" class="col-md-3 control-label input-sm" style="font-size: medium">Contraseña</label>
+                <div class="col-md-6">
+                    <asp:TextBox type="password" ID="ContraseñaTextBox" runat="server" class="form-control input-sm" Style="font-size: medium"></asp:TextBox>            
+                </div>
+                 <asp:RequiredFieldValidator ID="ValidaContraseña" runat="server" ErrorMessage="El campo &quot;Contraseña&quot; esta vacio" ControlToValidate="ContraseñaTextBox" ForeColor="Red" Display="Dynamic" ToolTip="Campo Contraseña obligatorio" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
             </div>
-        </div>
-        
-        <div class="row">
-            <div class="form-group col-md-7 col-md-offset-3">
-                <label for="TextBoxConfirmacionPassword">Confirm Password</label>
-                <asp:TextBox class="form-control" TextMode="Password" ID="TextBoxConfirmacionPassword" runat="server" placeholder="Password" autocomplete="off"> </asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator6" ControlToValidate="TextBoxConfirmacionPassword" runat="server" Display="Dynamic" ErrorMessage="Introduzca la confirmacion de Password"></asp:RequiredFieldValidator>
+            <%--Confirmar Contraseña--%>
+            <div class="form-group">
+                <label for="ConfirmarContraseñaTextBox" class="col-md-3 control-label input-sm" style="font-size: medium">Confirmar Contraseña</label>
+                <div class="col-md-6">
+                    <asp:TextBox type="password" ID="ConfirmarContraseñaTextBox" runat="server" class="form-control input-sm" Style="font-size: medium"></asp:TextBox>                  
+                </div>
+                <asp:CompareValidator ID="ComparaContraseñas" runat="server" ErrorMessage="Las Contraseñas no son iguales" ControlToValidate="ConfirmarContraseñaTextBox" ControlToCompare="ContraseñaTextBox" ForeColor="Red" Display="Dynamic" ToolTip="Las Contraseñas no son iguales" ValidationGroup="Guardar">*</asp:CompareValidator>
+              <asp:RequiredFieldValidator ID="ValidaConfirmarContraseña" runat="server" ErrorMessage="El campo &quot;Nombres&quot; estas vacio" ControlToValidate="ConfirmarContraseñaTextBox" ForeColor="Red" Display="Dynamic" ToolTip="Campo Confirmar Contraseña obligatorio" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-7 col-md-offset-3">
-                <label for="TextBoxFecha">Fecha</label>
-                <asp:TextBox TextMode="Date" class="form-control" ID="TextBoxFecha" runat="server" placeholder="Fecha de Registro del Usuario"></asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator3" ControlToValidate="TextBoxFecha" runat="server" Display="Dynamic" ErrorMessage="Introduzca la Fecha de registro del usuario"></asp:RequiredFieldValidator>
+            <%--Tipo Usuario--%>
+            <div class="form-group">
+                <label for="TipoUsuarioDropDownList" class="col-md-3 control-label input-sm" style="font-size:medium">Tipo Usuario</label>
+                <div class="col-md-6">
+                    <asp:DropDownList ID="TipoUsuarioDropDownList" runat="server" Class="form-control input-sm" style="font-size:medium" >
+                        <asp:ListItem Selected="True">Administrador</asp:ListItem>
+                        <asp:ListItem>Cajero</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-7 col-md-offset-3">
-                <label for="TextBoxNombre">Nombre</label>
-                <asp:TextBox class="form-control" ID="TextBoxNombre" runat="server" placeholder="Nombre del Usuario" autocomplete="off"> </asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator4" ControlToValidate="TextBoxNombre" runat="server" Display="Dynamic" ErrorMessage="Introduzca el Nombre del usuario"></asp:RequiredFieldValidator>
+            <%--Fecha--%>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <asp:TextBox ID="FechaTextBox" TextMode="Date" runat="server" class="form-control input-sm" Style="font-size:medium" Visible="false"></asp:TextBox>
+                </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-7 col-md-offset-3">
-                <label for="TextBoxEmail">Email</label>
-                <asp:TextBox TextMode="MultiLine" class="form-control" ID="TextBoxEmail" runat="server" placeholder="Email del Cliente" autocomplete="off"> </asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator5" ControlToValidate="TextBoxEmail" runat="server" Display="Dynamic" ErrorMessage="Introduzca un email"></asp:RequiredFieldValidator>
+            <br />
+             <%--Botones--%>
+            <div class="panel">
+                <div class="text-center">
+                    <div class="form-group">
+                        <asp:Button ID="NuevoButton" runat="server" Text="Nuevo" class="btn btn-primary btn-lg" OnClick="NuevoButton_Click" />
+                        <asp:Button ID="GuardarButton" runat="server" Text="Guardar" class="btn btn-success btn-lg"  ValidationGroup="Guardar" OnClick="GuardarButton_Click"  />
+                        <asp:Button ID="EliminarButton" runat="server" Text="Eliminar" class="btn btn-danger btn-lg" OnClick="EliminarButton_Click"  />
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="btn-block text-center">
-            <asp:Button class="btn btn-primary" ID="ButtonNuevo" runat="server" Text="Nuevo" OnClick="ButtonNuevo_Click"/>
-            <asp:Button class="btn btn-success" ValidationGroup="save" ID="ButtonGuardar" runat="server" Text="Guardar" OnClick="ButtonGuardar_Click"/>
-            <asp:Button class="btn btn-danger" ValidationGroup="id" ID="ButtonEliminar" runat="server" Text="Eliminar" OnClick="ButtonEliminar_Click"/>
         </div>
     </div>
+   </div>
 </asp:Content>

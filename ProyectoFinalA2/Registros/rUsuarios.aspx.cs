@@ -1,8 +1,10 @@
 ﻿using BLL;
 using Entidades;
+using ProyectoFinalA2.Utiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -13,119 +15,147 @@ namespace ProyectoFinalA2.Registros
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-
-        protected void ButtonBuscar_Click(object sender, EventArgs e)
-        {
-            RepositorioBase<Usuarios> usuarioRepository = new RepositorioBase<Usuarios>();
-            Usuarios usuario = usuarioRepository.Buscar(int.Parse(TextBoxUsuarioID.Text));
-
-            if (usuario != null)
+            if (!Page.IsPostBack)
             {
-                LlenarCampos(usuario);
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Usuario Encontrado');", addScriptTags: true);
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['error']('Usuario no Encontrado');", addScriptTags: true);
-            }
-        }
-
-        private void ClearAll()
-        {
-            TextBoxUsuarioID.Text = String.Empty;
-            TextBoxNombre.Text = String.Empty;
-            TextBoxUsername.Text = String.Empty;
-            TextBoxPassword.Text = String.Empty;
-            TextBoxConfirmacionPassword.Text = String.Empty;
-            TextBoxEmail.Text = String.Empty;
-            TextBoxFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
-        }
-
-        private void LlenarCampos(Usuarios usuario)
-        {
-            TextBoxUsername.Text = usuario.Username;
-            TextBoxPassword.Text = usuario.Password;
-            TextBoxFecha.Text = usuario.Fecha.ToString("yyyy-MM-dd");
-            TextBoxNombre.Text = usuario.Nombre;
-            
-        }
-
-        protected void ButtonNuevo_Click(object sender, EventArgs e)
-        {
-            ClearAll();
-        }
-
-        protected void ButtonGuardar_Click(object sender, EventArgs e)
-        {
-            if (Page.IsValid)
-            {
-                RepositorioBase<Usuarios> usuario = new RepositorioBase<Usuarios>();
-
-                int id = 0;
-
-                if (TextBoxPassword.Text == TextBoxConfirmacionPassword.Text)
+                int id = Utiles.ToInt(Request.QueryString["id"]);
+                if (id > 0)
                 {
-                    if (ComprobarID(id) == 0)
+                    RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
+                    var registro = repositorio.Buscar(id);
+
+                    if (registro == null)
                     {
-                        if (usuario.Guardar(LlenaClase()))
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Usuario Guardado');", addScriptTags: true);
-                        ClearAll();
+                        Utiles.ShowToastr(this.Page, "Registro no encontrado", "Error", "error");
                     }
                     else
                     {
-                        if (usuario.Modificar(LlenaClase()))
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Usuario Modificado');", addScriptTags: true);
-                        ClearAll();
+                        LlenaCampos(registro);
                     }
+                }
+            }
+        }
+
+        protected void Limpiar()
+        {
+            UsuarioIdTextBox.Text = "0";
+            NombresTextBox.Text = string.Empty;
+            NombreUsuarioTextBox.Text = string.Empty;
+            ContraseñaTextBox.Text = string.Empty;
+            ConfirmarContraseñaTextBox.Text = string.Empty;
+        }
+
+        protected Usuarios LlenaClase(Usuarios usuarios)
+        {
+            usuarios.UsuarioId = Utiles.ToInt(UsuarioIdTextBox.Text);
+            usuarios.Nombres = NombresTextBox.Text;
+            usuarios.NombreUsuario = NombreUsuarioTextBox.Text;
+            usuarios.Contraseña = ContraseñaTextBox.Text;
+            usuarios.ConfirmarContraseña = ConfirmarContraseñaTextBox.Text;
+            usuarios.TipoUsuario = TipoUsuarioDropDownList.Text;
+            bool resultado = DateTime.TryParse(FechaTextBox.Text, out DateTime fecha);
+            if (resultado)
+                usuarios.Fecha = fecha;
+            return usuarios;
+        }
+
+        private void LlenaCampos(Usuarios usuarios)
+        {
+            UsuarioIdTextBox.Text = Convert.ToString(usuarios.UsuarioId);
+            NombresTextBox.Text = usuarios.Nombres;
+            NombreUsuarioTextBox.Text = usuarios.NombreUsuario;
+            ContraseñaTextBox.Text = usuarios.Contraseña;
+            ConfirmarContraseñaTextBox.Text = usuarios.ConfirmarContraseña;
+            TipoUsuarioDropDownList.Text = usuarios.TipoUsuario;
+            FechaTextBox.Text = usuarios.Fecha.ToString();
+        }
+
+        protected bool ValidarNombres(Usuarios usuarios)
+        {
+            bool validar = false;
+            Expression<Func<Usuarios, bool>> filtro = p => true;
+            RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
+            var lista = repositorio.GetList(c => true);
+            foreach (var item in lista)
+            {
+                if (usuarios.NombreUsuario == item.NombreUsuario)
+                {
+                    Utiles.ShowToastr(this.Page, "Usuario ya Existe", "Error", "error");
+                    return validar = true;
+                }
+            }
+            return validar;
+        }
+
+        
+
+        protected void NuevoButton_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+        }
+
+        protected void GuardarButton_Click(object sender, EventArgs e)
+        {
+            RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
+            Usuarios usuario = new Usuarios();
+            bool paso = false;
+
+            if (IsValid == false)
+            {
+                Utiles.ShowToastr(this.Page, "Revisar todos los campo", "Error", "error");
+                return;
+            }
+            usuario = LlenaClase(usuario);
+            if (ValidarNombres(usuario))
+            {
+                return;
+            }
+            else
+            {
+
+                if (usuario.UsuarioId == 0)
+                {
+
+                    paso = repositorio.Guardar(usuario);
+                    Utiles.ShowToastr(this.Page, "Guardado con exito!!", "Guardado", "success");
+                    Limpiar();
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['info']('Recuerde que la contraseña debe ser igual a la confirmacion de esta');", addScriptTags: true);
+                    paso = repositorio.Modificar(usuario);
+                    Utiles.ShowToastr(this.Page, "Modificado con exito!!", "Modificado", "success");
+                    Limpiar();
                 }
             }
         }
 
-
-        private Usuarios LlenaClase()
+        protected void EliminarButton_Click(object sender, EventArgs e)
         {
-            int id = 0;
-            return new Usuarios(
-                ComprobarID(id),
-                TextBoxUsername.Text,
-                TextBoxPassword.Text,
-                Convert.ToDateTime(TextBoxFecha.Text),
-                TextBoxNombre.Text,
-                TextBoxEmail.Text
-                );
-        }
-
-        private int ComprobarID(int id)
-        {
-            if (TextBoxUsuarioID.Text == String.Empty)
-                id = 0;
+            int id = Convert.ToInt32(UsuarioIdTextBox.Text);
+            RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
+            if (repositorio.Eliminar(id))
+            {
+                Utiles.ShowToastr(this.Page, "Eliminado con exito!!", "Eliminado", "info");
+            }
             else
-                id = int.Parse(TextBoxUsuarioID.Text);
-            return id;
+                Utiles.ShowToastr(this.Page, "Fallo al Eliminar :(", "Error", "error");
+            Limpiar();
         }
 
-        protected void ButtonEliminar_Click(object sender, EventArgs e)
+        protected void BuscarButton_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Usuarios> usuarioRepository = new RepositorioBase<Usuarios>();
-            Usuarios usuario = usuarioRepository.Buscar(int.Parse(TextBoxUsuarioID.Text));
-
-            int.TryParse(TextBoxUsuarioID.Text, out int id);
+            RepositorioBase<Usuarios> repositorio = new RepositorioBase<Usuarios>();
+            var usuario = repositorio.Buscar(Utiles.ToInt(UsuarioIdTextBox.Text));
 
             if (usuario != null)
             {
-                usuarioRepository.Eliminar(int.Parse(TextBoxUsuarioID.Text));
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Usuario Eliminado');", addScriptTags: true);
-                ClearAll();
+                Limpiar();
+                LlenaCampos(usuario);
+                Utiles.ShowToastr(this, "Busqueda exitosa", "Exito", "success");
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['error']('No se puede eliminar un usuario que no existe');", addScriptTags: true);
+                Utiles.ShowToastr(this.Page, "El usuario que intenta buscar no existe", "Error", "error");
+                Limpiar();
             }
         }
     }

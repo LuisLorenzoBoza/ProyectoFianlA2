@@ -10,7 +10,7 @@
 namespace ProyectoFinalA2.Registros {
     
     
-    public partial class rFacturas {
+    public partial class rVentas {
         
         /// <summary>
         /// TextBoxFacturaID control.

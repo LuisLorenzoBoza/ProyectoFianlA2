@@ -175,9 +175,9 @@ namespace ProyectoFinalA2.Registros
 
         private Facturas LlenaClase()
         {
-            Facturas.Monto = Utils.ToDecimal(TextBoxTotal.Text);
-            ventas.Efectivo = Utils.ToDecimal(EfectivoTextBox.Text);
-            ventas.Devuelta = Utils.ToDecimal(DevueltaTextBox.Text);
+            Facturas.Monto = Utiles.ToDecimal(TextBoxTotal.Text);
+            ventas.Efectivo = Utiles.ToDecimal(EfectivoTextBox.Text);
+            ventas.Devuelta = Utiles.ToDecimal(DevueltaTextBox.Text);
             bool resultado = DateTime.TryParse(FechaTextBox.Text, out DateTime date);
             if (resultado == true)
                 ventas.Fecha = date;
