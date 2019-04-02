@@ -33,8 +33,8 @@ namespace ProyectoFinalA2.Registros
 
         protected void ButtonBuscar_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Productos> ArtRepository = new RepositorioBase<Productos>();
-            Productos articulos = ArtRepository.Buscar(int.Parse(TextBoxArticuloID.Text));
+            RepositorioBase<Articulos> ArtRepository = new RepositorioBase<Articulos>();
+            Articulos articulos = ArtRepository.Buscar(int.Parse(TextBoxArticuloID.Text));
 
             if (articulos != null)
             {
@@ -47,10 +47,10 @@ namespace ProyectoFinalA2.Registros
             }
         }
 
-        private void LlenarCampos(Productos articulos)
+        private void LlenarCampos(Articulos articulos)
         {
             DropDownListCategorias.Text = articulos.IdCategorias.ToString();
-            TextBoxNombreArticulo.Text = articulos.Nombre;
+            TextBoxNombreArticulo.Text = articulos.NombreArticulo;
             TextBoxFechaVencimiento.Text = articulos.FechaDeVencimiento.ToString("yyyy-MM-dd");
             TextBoxCosto.Text = articulos.Costo.ToString();
             TextBoxExistencia.Text = articulos.Existencia.ToString();
@@ -78,7 +78,7 @@ namespace ProyectoFinalA2.Registros
         {
             if (Page.IsValid)
             {
-                RepositorioBase<Productos> rb = new RepositorioBase<Productos>();
+                RepositorioBase<Articulos> rb = new RepositorioBase<Articulos>();
 
                 double.TryParse(TextBoxCosto.Text, out double costo);
                 double.TryParse(TextBoxPrecio.Text, out double precio);
@@ -117,10 +117,10 @@ namespace ProyectoFinalA2.Registros
             return id;
         }
 
-        private Productos LlenaClase()
+        private Articulos LlenaClase()
         {
             int id = 0;
-            return new Productos(
+            return new Articulos(
                     ComprobarID(id),
                     int.Parse(DropDownListCategorias.SelectedValue),
                     TextBoxNombreArticulo.Text,
@@ -133,8 +133,8 @@ namespace ProyectoFinalA2.Registros
 
         protected void ButtonEliminar_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Productos> ArtRepositorio = new RepositorioBase<Productos>();
-            Productos articulos = ArtRepositorio.Buscar(int.Parse(TextBoxArticuloID.Text));
+            RepositorioBase<Articulos> ArtRepositorio = new RepositorioBase<Articulos>();
+            Articulos articulos = ArtRepositorio.Buscar(int.Parse(TextBoxArticuloID.Text));
 
             int.TryParse(TextBoxArticuloID.Text, out int id);
 

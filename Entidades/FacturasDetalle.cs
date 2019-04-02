@@ -14,7 +14,7 @@ namespace Entidades
         [Key]
         public int ID { get; set; }
         public int FacturaID { get; set; }
-        public int IDProd { get; set; }
+        public int IDArt { get; set; }
         public int Cantidad { get; set; }
         public string NombreArticulo { get; set; }
         public int Precio { get; set; }
@@ -25,7 +25,7 @@ namespace Entidades
         {
             ID = id;
             FacturaID = idFactura;
-            IDProd = idProd;
+            IDArt = idProd;
             Cantidad = cantidad;
             NombreArticulo = nombreArticulo;
             Precio = precio;
@@ -36,7 +36,7 @@ namespace Entidades
         {
             ID = 0;
             FacturaID = 0;
-            IDProd = 0;
+            IDArt = 0;
             Cantidad = 0;
             NombreArticulo = string.Empty;
             Precio = 0;

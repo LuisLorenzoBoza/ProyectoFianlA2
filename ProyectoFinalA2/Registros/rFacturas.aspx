@@ -13,16 +13,13 @@
 
         <hr style="color: #358CCE" />
 
-        <label for="TextBoxFacturaID">Factura ID</label>
+        <label for="TextBoxArticuloID">ID</label>
         <div class="form-row">
             <div class="form-group col-lg-1">
                 <asp:TextBox TextMode="Number" class="form-control" ID="TextBoxFacturaID" runat="server" placeholder="ID"></asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="id_f" SetFocusOnError="true" ForeColor="Red" ID="RequiredFieldValidator7" ControlToValidate="TextBoxFacturaID" runat="server" Display="Dynamic" ErrorMessage="Introduzca un id"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ValidationGroup="id" SetFocusOnError="true" ForeColor="Red" ID="RequiredFieldValidator7" ControlToValidate="TextBoxFacturaID" runat="server" Display="Dynamic" ErrorMessage="id"></asp:RequiredFieldValidator>
             </div>
-            <div class="btn-group-col-md-1">
-                <asp:Button class="btn btn-primary" ValidationGroup="id_f" ID="ButtonBuscarFactura" runat="server" Text="Buscar" OnClick="ButtonBuscarFactura_Click" />
-            </div>
-
+            
         </div>
 
         
@@ -30,12 +27,12 @@
             <div class="form-group col-md-5 col-md-offset-3">
                 <label for="TextBoxFecha">Fecha</label>
                 <asp:TextBox TextMode="Date" class="form-control" ID="TextBoxFecha" runat="server" placeholder="Fecha de Registro del Usuario"></asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator3" ControlToValidate="TextBoxFecha" runat="server" Display="Dynamic" ErrorMessage="Introduzca la Fecha de registro del usuario"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator3" ControlToValidate="TextBoxFecha" runat="server" Display="Dynamic" ErrorMessage="Introduzca la Fecha de venta"></asp:RequiredFieldValidator>
             </div>
         </div>
 
         <fieldset>
-            <legend>Datos del Cliente</legend>
+            <legend>Cliente</legend>
 
             <label for="TextBoxClienteID">Cliente ID</label>
             <div class="form-row">
@@ -52,12 +49,8 @@
                     <label for="TextBoxNombreCliente">Nombre</label>
                     <asp:TextBox class="form-control" ID="TextBoxNombreCliente" runat="server" autocomplete="off" ReadOnly="true"> </asp:TextBox>
                 </div>
-                <div class="form-group col-md-3 col-md-offset-3">
-                    <label for="TextBoxApellidoCliente">Apellido</label>
-                    <asp:TextBox class="form-control" ID="TextBoxApellidoCliente" runat="server" autocomplete="off" ReadOnly="true"> </asp:TextBox>
-                </div>
+                
             </div>
-
             <div class="form-row">
                 <div class="form-row">
                     <div class="form-group col-lg-3" style="margin-left: 272px;">
@@ -65,38 +58,26 @@
                     <div class="btn-group-col-md-1">
                     </div>
                 </div>
-                <div class="form-group col-md-3 col-md-offset-4">
-                    <label for="TextBoxTelefonoCliente">Telefono</label>
-                    <asp:TextBox class="form-control" ID="TextBoxTelefonoCliente" runat="server"  autocomplete="off" ReadOnly="true"> </asp:TextBox>
-                </div>
-                <div class="form-group col-md-3 col-md-offset-4">
-                    <label for="TextBoxDireccionCliente">Direccion</label>
-                    <asp:TextBox class="form-control" ID="TextBoxDireccionCliente"  runat="server" autocomplete="off" ReadOnly="true"> </asp:TextBox>
-                </div>
+                
+                
             </div>
 
         </fieldset>
         <br />
         <br />
         <fieldset>
-            <legend>Datos de los Articulos</legend>
+            <legend>Articulos</legend>
 
             <label for="TextBoxArticuloID">Articulo ID</label>
             <div class="form-row">
                 <div class="form-row">
                     <div class="form-group col-lg-3">
-
                         <asp:TextBox TextMode="Number" class="form-control" ID="TextboxArticuloID" text="0" runat="server" placeholder="ID" OnTextChanged="TextboxArticuloID_TextChanged"></asp:TextBox>
                         <asp:RequiredFieldValidator ValidationGroup="id_c" SetFocusOnError="true" ForeColor="Red" ID="RequiredFieldValidator2" ControlToValidate="TextboxArticuloID" runat="server" Display="Dynamic" ErrorMessage="Introduzca un id"></asp:RequiredFieldValidator>
-                   
-                    
                     </div>
-                    <div class="btn-group-col-md-1">
-                        <asp:Button class="btn btn-primary" ValidationGroup="id_p" ID="ButtonBuscarArticulo" runat="server" Text="Buscar" OnClick="ButtonBuscarArticulo_Click" />
-                    </div>
-                </div>
+               </div>
                 <div class="form-group col-md-3 col-md-offset-3">
-                    <label for="TextBoxNombreArticulo">Nombre</label>
+                    <label for="TextBoxNombreArticulo">NombreArticulo</label>
                     <asp:TextBox class="form-control" ID="TextBoxNombreArticulo" runat="server" autocomplete="off" ReadOnly="true"> </asp:TextBox>
                 </div>
                 <div class="form-group col-md-3 col-md-offset-4">
@@ -143,16 +124,22 @@
         </fieldset>
 
         <div class="form-row">
-            <div class="form-group col-md-5" style="float:left">
-                <label for="TextBoxComentario">Comentario</label>
-                <asp:TextBox TextMode="MultiLine" class="form-control" ID="TextBoxComentario" runat="server" placeholder="Escriba un comentario" autocomplete="off"> </asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator5" ControlToValidate="TextBoxComentario" runat="server" Display="Dynamic" ErrorMessage="Introduzca un comentario"></asp:RequiredFieldValidator>
-            </div>
-
             <div class="form-group col-md-3 " style="margin-left:350px;">
                 <label for="TextBoxTotal">Total</label>
                 <asp:TextBox class="form-control" ReadOnly="true" ID="TextBoxTotal" runat="server" autocomplete="off"> </asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator4" ControlToValidate="TextBoxTotal" runat="server" Display="Dynamic" ErrorMessage="Total"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator6" ControlToValidate="TextBoxTotal" runat="server" Display="Dynamic" ErrorMessage="Total"></asp:RequiredFieldValidator>
+            </div>
+
+           <div class="form-group col-md-3 " style="margin-left:350px;">
+                <label for="TextBoxEfectivo">EfectivoRecibido</label>
+                <asp:TextBox class="form-control" ReadOnly="true" ID="TextBoxEfectivo" runat="server" autocomplete="off"> </asp:TextBox>
+                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator5" ControlToValidate="TextBoxEfectivo" runat="server" Display="Dynamic" ErrorMessage="EfectivoRecibido"></asp:RequiredFieldValidator>
+            </div>
+
+            <div class="form-group col-md-3 " style="margin-left:350px;">
+                <label for="TextBoxDevuelta">Devuelta</label>
+                <asp:TextBox class="form-control" ReadOnly="true" ID="TextBoxDevuelta" runat="server" autocomplete="off"> </asp:TextBox>
+                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator4" ControlToValidate="TextBoxDevuelta" runat="server" Display="Dynamic" ErrorMessage="Devuelta"></asp:RequiredFieldValidator>
             </div>
         </div>
 

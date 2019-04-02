@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class Productos
+    public class Articulos
     {
         [Key]
-        public int IdProductos { get; set; }
-        public String Nombre { get; set; }
+        public int IdArticulos { get; set; }
+        public String NombreArticulo { get; set; }
         public int Existencia { get; set; }
         public Double Precio { get; set; }
 
-        public Productos(int idArticulos, int idCategorias, string nombre, double precio, int existencia)
+        public Articulos(int idArticulos, int idCategorias, string nombre, double precio, int existencia)
         {
-            IdProductos = idArticulos;
-            Nombre = nombre;
+            IdArticulos = idArticulos;
+            NombreArticulo = nombre;
             Precio = precio;
             Existencia = existencia;
         }
 
-        public Productos()
+        public Articulos()
         {
-            IdProductos = 0;
-            Nombre = String.Empty;
+            IdArticulos = 0;
+            NombreArticulo = String.Empty;
             Precio = 0;
             Existencia = 0;
             

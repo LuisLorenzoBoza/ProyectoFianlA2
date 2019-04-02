@@ -11,7 +11,7 @@ namespace DAL
     public class Contexto : DbContext
     {
         public DbSet<Usuarios> Usuario { get; set; }
-        public DbSet<Productos> Articulos { get; set; }
+        public DbSet<Articulos> Articulos { get; set; }
         public DbSet<Clientes> Cliente { get; set; }
         public DbSet<Categorias> Categoria { get; set; }
         public DbSet<Facturas> Facturas { get; set; }

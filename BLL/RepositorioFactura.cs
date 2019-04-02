@@ -28,7 +28,7 @@ namespace BLL
             foreach (var item in facturas.Lista)
             {
 
-                var articulo = _contexto.Articulos.Find(item.IDProd);
+                var articulo = _contexto.Articulos.Find(item.IDArt);
                 articulo.Existencia += item.Cantidad;
 
                 _contexto.Entry(articulo).State = EntityState.Modified;
@@ -45,7 +45,7 @@ namespace BLL
             foreach (var item in facturas.Lista)
             {
 
-                var articulo = _contexto.Articulos.Find(item.IDProd);
+                var articulo = _contexto.Articulos.Find(item.IDArt);
                 articulo.Existencia -= item.Cantidad;
 
                 _contexto.Entry(articulo).State = EntityState.Modified;
@@ -68,7 +68,7 @@ namespace BLL
             var facturaAnt = factura1;
             foreach (var item in entity.Lista)
             {
-                var articulo = _contexto.Articulos.Find(item.IDProd);
+                var articulo = _contexto.Articulos.Find(item.IDArt);
                 articulo.Existencia -= item.Cantidad;
                 _contexto.Entry(articulo).State = EntityState.Modified;
 

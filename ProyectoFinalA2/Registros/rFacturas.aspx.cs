@@ -66,8 +66,9 @@ namespace ProyectoFinalA2.Registros
             TextBoxCantidadArticulo.Text = String.Empty;
 
             TextBoxFecha.Text = facturas.Fecha.ToString("yyyy-MM-dd");
-            TextBoxComentario.Text = facturas.Observacion;
             TextBoxTotal.Text = facturas.Monto.ToString();
+            TextBoxEfectivo.Text = facturas.EfectivoRecibido.ToString();
+            TextBoxDevuelta.Text = facturas.Devuelta.ToString();
             FacturaGridView.DataSource = facturas.Lista;
             FacturaGridView.DataBind();
             ViewState["Detalle"] = facturas.Lista;
@@ -97,15 +98,15 @@ namespace ProyectoFinalA2.Registros
 
         protected void ButtonAgregar_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Productos> art = new RepositorioBase<Productos>();
+            RepositorioBase<Articulos> art = new RepositorioBase<Articulos>();
             FacturasDetalle facdetalle = new FacturasDetalle();
             Facturas facturas = new Facturas();
 
             var buscar = art.Buscar(int.Parse(TextboxArticuloID.Text));
-            facdetalle.NombreArticulo = buscar.Nombre;
+            facdetalle.NombreArticulo = buscar.NombreArticulo;
             facdetalle.Precio = Convert.ToInt32(TextBoxPrecioArticulo.Text);
             facdetalle.Importe = facdetalle.Precio * int.Parse(TextBoxCantidadArticulo.Text);
-            facdetalle.IDProd = int.Parse(TextboxArticuloID.Text);
+            facdetalle.IDArt = int.Parse(TextboxArticuloID.Text);
             facdetalle.Cantidad = int.Parse(TextBoxCantidadArticulo.Text);
 
             total += facdetalle.Importe;
@@ -214,8 +215,8 @@ namespace ProyectoFinalA2.Registros
 
         protected void ButtonBuscarArticulo_Click(object sender, EventArgs e)
         {
-            RepositorioBase<Productos> TRA = new RepositorioBase<Productos>();
-            Productos articulos = null;
+            RepositorioBase<Articulos> TRA = new RepositorioBase<Articulos>();
+            Articulos articulos = null;
 
 
             if (!TextboxArticuloID.Text.Equals(String.Empty))
@@ -234,10 +235,10 @@ namespace ProyectoFinalA2.Registros
             }
         }
 
-        private void LlenarCamposArticulos(Productos articulos)
+        private void LlenarCamposArticulos(Articulos articulos)
         {
-            TextboxArticuloID.Text = articulos.IdProductos.ToString();
-            TextBoxNombreArticulo.Text = articulos.Nombre.ToString();
+            TextboxArticuloID.Text = articulos.IdArticulos.ToString();
+            TextBoxNombreArticulo.Text = articulos.NombreArticulo.ToString();
             TextBoxPrecioArticulo.Text = articulos.Precio.ToString();
             TextBoxImporteArticulo.Text = articulos.Costo.ToString();
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="rArticulosaspx.aspx.cs" Inherits="ProyectoFinalA2.Registros.rArticulosaspx" %>
+﻿<%@ Page Title=""Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="rArticulos.aspx.cs" Inherits="ProyectoFinalA2.Registros.rArticulosaspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -21,13 +21,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-7 col-md-offset-3">
-                <label for="DropDownListCategorias">Categoria</label>
-                <asp:DropDownList ID="DropDownListCategorias" CssClass="form-control" runat="server" placeholder="Seleccione una categoria"></asp:DropDownList>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator6" ControlToValidate="DropDownListCategorias" runat="server" Display="Dynamic" ErrorMessage="Seleccione la categoria del articulo"></asp:RequiredFieldValidator>
-            </div>
-        </div>
+        
 
         <div class="row">
             <div class="form-group col-md-7 col-md-offset-3">
@@ -53,13 +47,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-7 col-md-offset-3">
-                <label for="TextBoxCosto">Costo</label>
-                <asp:TextBox TextMode="Number" class="form-control" ID="TextBoxCosto" runat="server" placeholder="Costo del Articulo" autocomplete="off"> </asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator4" ControlToValidate="TextBoxExistencia" runat="server" Display="Dynamic" ErrorMessage="Introduzca un Costo al Articulo"></asp:RequiredFieldValidator>
-            </div>
-        </div>
+       
 
         <div class="row">
             <div class="form-group col-md-7 col-md-offset-3">
