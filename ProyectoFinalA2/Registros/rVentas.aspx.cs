@@ -1,289 +1,245 @@
 ﻿using BLL;
-using DAL;
 using Entidades;
+using ProyectoFinalA2.Utiles;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace ProyectoFinalA2.Registros
 {
-    public partial class rFacturas : System.Web.UI.Page
+    public partial class rVentas : System.Web.UI.Page
     {
-        List<FacturasDetalle> detalle = new List<FacturasDetalle>();
-        public bool active { get; set; }
-        double total;
-
-        protected void Page_Load(object sender, EventArgs e)
+        
+       protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                ViewState.Add("Detalle", detalle);
-                ViewState.Add("Active", active);
-            }
-            else
-            {
-                detalle = (List<FacturasDetalle>)ViewState["Detalle"];
-                active = (bool)ViewState["Active"];
-            }
-
-
-            TextBoxFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
-        }
-
-        protected void ButtonBuscarFactura_Click(object sender, EventArgs e)
-        {
-            RepositorioFactura rep = new RepositorioFactura();
-
-            Facturas facturas = rep.Buscar(int.Parse(TextBoxFacturaID.Text));
-
-
-            if (facturas != null)
-            {
-                LlenarCamposFactura(facturas);
-                active = true;
-                ViewState["Active"] = active;
-                //_Visible();
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Factura encontrada');", addScriptTags: true);
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['error']('Factura no Encontrada');", addScriptTags: true);
+                
             }
         }
 
-        private void LlenarCamposFactura(Facturas facturas)
+
+        protected void LimpiaOrden()
         {
-            TextBoxFacturaID.Text = facturas.IdFactura.ToString();
-            TextBoxClienteID.Text = facturas.IdCliente.ToString();
-            // TextboxArticuloID.Text = facturas.IdArticulo.ToString();
-            RepositorioBase<Productos> client = new RepositorioBase<Productos>();
-            Productos Clientes = client.Buscar(int.Parse(TextBoxClienteID.Text));
-            LlenarCamposClientes(Clientes);
+            CarritodeProductosGridView.DataSource = null;
+            CarritodeProductosGridView.DataBind();
 
-            TextBoxCantidadArticulo.Text = String.Empty;
-
-            TextBoxFecha.Text = facturas.Fecha.ToString("yyyy-MM-dd");
-            TextBoxTotal.Text = facturas.Monto.ToString();
-            TextBoxEfectivo.Text = facturas.EfectivoRecibido.ToString();
-            TextBoxDevuelta.Text = facturas.Devuelta.ToString();
-            FacturaGridView.DataSource = facturas.Lista;
-            FacturaGridView.DataBind();
-            ViewState["Detalle"] = facturas.Lista;
+            //CarritodeCombosGridView.DataSource = null;
+            //CarritodeCombosGridView.DataBind();
         }
 
-        protected void ButtonBuscarCliente_Click(object sender, EventArgs e)
+        private void Limpiar()
         {
-            RepositorioBase<Productos> client = new RepositorioBase<Productos>();
-            Productos Client = null;
-            if (!TextBoxClienteID.Text.Equals(string.Empty))
-            {
-                Client = client.Buscar(int.Parse(TextBoxClienteID.Text));
-
-            }
-
-
-            if (Client != null)
-            {
-                LlenarCamposClientes(Client);
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Cliente Encontrado');", addScriptTags: true);
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['error']('Cliente no Encontrado');", addScriptTags: true);
-            }
+            TotalTextBox.Text = string.Empty;
+            EfectivoTextBox.Text = string.Empty;
+            DevueltaTextBox.Text = string.Empty;
+            this.LimpiaOrden();
         }
 
-        protected void ButtonAgregar_Click(object sender, EventArgs e)
+        private Ventas LlenaClase(Ventas ventas)
         {
-            RepositorioBase<Productos> art = new RepositorioBase<Productos>();
-            FacturasDetalle facdetalle = new FacturasDetalle();
-            Facturas facturas = new Facturas();
-
-            var buscar = art.Buscar(int.Parse(TextboxArticuloID.Text));
-            facdetalle.NombreArticulo = buscar.NombreArticulo;
-            facdetalle.Precio = Convert.ToInt32(TextBoxPrecioArticulo.Text);
-            facdetalle.Importe = facdetalle.Precio * int.Parse(TextBoxCantidadArticulo.Text);
-            facdetalle.IDArt = int.Parse(TextboxArticuloID.Text);
-            facdetalle.Cantidad = int.Parse(TextBoxCantidadArticulo.Text);
-
-            total += facdetalle.Importe;
-
-            TextBoxTotal.Text = total.ToString();
-
-            detalle.Add(facdetalle);
-            FacturaGridView.DataSource = detalle;
-            FacturaGridView.DataBind();
-        }
-
-        protected void ButtonNuevo_Click(object sender, EventArgs e)
-        {
-            ClearAll();
-        }
-
-        private void ClearAll()
-        {
-            TextBoxClienteID.Text = String.Empty;
-            TextboxArticuloID.Text = String.Empty;
-            TextBoxFacturaID.Text = String.Empty;
-            TextBoxFecha.Text = String.Empty;
-            TextBoxComentario.Text = String.Empty;
-            TextBoxTotal.Text = String.Empty;
-            TextBoxNombreCliente.Text = String.Empty;
-            
-            
-            
-            TextBoxNombreArticulo.Text = String.Empty;
-            TextBoxPrecioArticulo.Text = String.Empty;
-            TextBoxCantidadArticulo.Text = String.Empty;
-            TextBoxImporteArticulo.Text = String.Empty;
-            FacturaGridView.DataSource = null;
-            FacturaGridView.DataBind();
-            active = false;
-            ViewState["Active"] = active;
-            //Invisible();
-        }
-
-        protected void ButtonGuardar_Click(object sender, EventArgs e)
-        {
-            if (Page.IsValid)
-            {
-                RepositorioFactura rb = new RepositorioFactura(); ;
-
-                int id = 0;
-
-                if (ComprobarID(id) == 0)
-                {
-                    if (rb.Guardar(LlenaClase()))
-                    {
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Facturas Guardada');", addScriptTags: true);
-                        ClearAll();
-                        total = 0;
-                    }
-
-                }
-                else
-                {
-                    if (rb.Modificar(LlenaClase()))
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Factura Modificada');", addScriptTags: true);
-                    ClearAll();
-                }
-            }
-        }
-
-        private Facturas LlenaClase()
-        {
-            Facturas.Monto = Utiles.ToDecimal(TextBoxTotal.Text);
-            ventas.Efectivo = Utiles.ToDecimal(EfectivoTextBox.Text);
-            ventas.Devuelta = Utiles.ToDecimal(DevueltaTextBox.Text);
+            ventas.TotalAPagar = Utils.ToDecimal(TotalTextBox.Text);
+            ventas.Efectivo = Utils.ToDecimal(EfectivoTextBox.Text);
+            ventas.Devuelta = Utils.ToDecimal(DevueltaTextBox.Text);
             bool resultado = DateTime.TryParse(FechaTextBox.Text, out DateTime date);
             if (resultado == true)
                 ventas.Fecha = date;
             ventas.DetalleProducto = (List<VentaProductosDetalle>)ViewState["VentaProductosDetalle"];
-            ventas.DetalleCombo = (List<CombosDetalle>)ViewState["CombosDetalle"];
+            //ventas.DetalleCombo = (List<CombosDetalle>)ViewState["CombosDetalle"];
             return ventas;
         }
 
-        private int ComprobarID(int id)
+        public bool Validar()
         {
-            if (TextBoxFacturaID.Text == String.Empty)
-                id = 0;
-            else
-                id = int.Parse(TextBoxFacturaID.Text);
-            return id;
+            bool validar = false;
+            if (EfectivoTextBox.Text == string.Empty || EfectivoTextBox.Text == null || EfectivoTextBox.Text == "0")
+            {
+                Utils.ShowToastr(this.Page, "No puede Pagar en 0.00", "Revisar", "error");
+                validar = true;
+            }
+            return validar;
         }
 
-        protected void ButtonEliminar_Click(object sender, EventArgs e)
-        {
-            RepositorioFactura rep = new RepositorioFactura();
-            Facturas facturas = rep.Buscar(int.Parse(TextBoxFacturaID.Text));
 
-            if (facturas != null)
+        protected void Pagar_Click(object sender, EventArgs e)
+        {
+            Ventas ventas = new Ventas();
+            RepositorioBase<Ventas> repositorio = new RepositorioBase<Ventas>();
+            bool paso = false;
+            if (IsValid == false)
             {
-                if (rep.Eliminar(int.Parse(TextBoxFacturaID.Text)))
+                Utils.ShowToastr(this.Page, "Revisar todos los campo", "Error", "error");
+                return;
+            }
+            if (Validar())
+            {
+                Utils.ShowToastr(this.Page, "Revisar todos los campo", "Error", "error");
+                return;
+            }
+            ventas = LlenaClase(ventas);
+            paso = repositorio.Guardar(ventas);
+            Limpiar();
+            if (paso)
+                Utils.ShowToastr(this.Page, "La Orden fue pagada", "Pagado", "success");
+            else
+                Utils.ShowToastr(this.Page, "El Pago no fue efectuado", "Error", "error");
+
+
+        }
+
+        //Agrega Productos a la orden
+        protected void ProductosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Select")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+
+                Expression<Func<Productos, bool>> filtro = p => true;
+                RepositorioBase<Productos> repositorio = new RepositorioBase<Productos>();
+                var lista = repositorio.GetList(c => true);
+
+                Ventas ventas = new Ventas();
+                var productos = repositorio.Buscar(lista[index].ProductoId);
+
+                if (CarritodeProductosGridView.Rows.Count != 0)
                 {
-                    ScriptManager.RegisterStartupScript(Page, typeof(Page), "Popup", "alert('Factura eliminada')", true);
-                    ClearAll();
-                    //Invisible();
+                    ventas.DetalleProducto = (List<VentaProductosDetalle>)ViewState["VentaProductosDetalle"];
                 }
-                else
-                    ScriptManager.RegisterStartupScript(Page, typeof(Page), "Popup", "alert('No se pudo eliminar la factura')", true);
+
+                ventas.DetalleProducto.Add(new VentaProductosDetalle(productos.NombreProducto, productos.TipoProducto, productos.Precio, productos.Descripcion));
+
+                Decimal.TryParse(TotalTextBox.Text, out decimal calculo);
+                calculo = calculo + productos.Precio;
+                TotalTextBox.Text = calculo.ToString();
+
+                ViewState["VentaProductosDetalle"] = ventas.DetalleProducto;
+                CarritodeProductosGridView.DataSource = ViewState["VentaProductosDetalle"];
+                CarritodeProductosGridView.DataBind();
             }
+
         }
 
-        protected void ButtonBuscarArticulo_Click(object sender, EventArgs e)
+        protected void EfectivoTextBox_TextChanged(object sender, EventArgs e)
         {
-            RepositorioBase<Productos> TRA = new RepositorioBase<Productos>();
-            Productos articulos = null;
-
-
-            if (!TextboxArticuloID.Text.Equals(String.Empty))
+            if (TotalTextBox.Text != null && EfectivoTextBox.Text != null)
             {
-                articulos = TRA.Buscar(int.Parse(TextboxArticuloID.Text));
-            }
-
-            if (articulos != null)
-            {
-                LlenarCamposArticulos(articulos);
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Articulo Encontrado');", addScriptTags: true);
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['error']('Articulo no Encontrado');", addScriptTags: true);
+                decimal calculo;
+                Decimal.TryParse(TotalTextBox.Text, out calculo);
+                calculo = Utils.ToDecimal(EfectivoTextBox.Text) - calculo;
+                DevueltaTextBox.Text = calculo.ToString();
             }
         }
-
-        private void LlenarCamposArticulos(Productos articulos)
-        {
-            TextboxArticuloID.Text = articulos.IdArticulos.ToString();
-            TextBoxNombreArticulo.Text = articulos.NombreArticulo.ToString();
-            TextBoxPrecioArticulo.Text = articulos.Precio.ToString();
-            
-
-        }
-
-        private void LlenarCamposClientes(Productos clientes)
-        {
-            TextBoxClienteID.Text = clientes.IdCliente.ToString();
-            TextBoxNombreCliente.Text = clientes.Nombre.ToString();
-            
-           
-            
-
-        }
-
-        protected void TextBoxCantidadArticulo_TextChanged(object sender, EventArgs e)
-        {
-            //Contexto db = new Contexto();
-            //var articulo = db.Articulos.Find(TextboxArticuloID.Text);
-
-            //if (Convert.ToInt32(TextBoxCantidadArticulo.ToString()) > Convert.ToInt32(articulo.Existencia.ToString()))
-            //{
-            //    ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('La cantidad no debe exceder el inventario ');", addScriptTags: true);
-            //    TextBoxCantidadArticulo.Text = "0";
-            //}
-            //else
-            //{
-            //    ScriptManager.RegisterStartupScript(this, typeof(Page), "toastr_message", script: "toastr['success']('Articulo agregado correctamente ');", addScriptTags: true);
-            //}
-        }
-
-        //private void _Visible()
+        //Agrega Combos a la orden
+        //protected void CombosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         //{
-        //    TextBoxTotal.Visible = true;
-        //    ButtonNuevo.Visible = true;
-        //    ButtonGuardar.Visible = true;
-        //    ButtonEliminar.Visible = true;
+        //    if (e.CommandName == "Select")
+        //    {
+        //        int index = Convert.ToInt32(e.CommandArgument);
+
+        //        Expression<Func<Combos, bool>> filtro = p => true;
+        //        RepositorioBase<Combos> repositorio = new RepositorioBase<Combos>();
+        //        var lista = repositorio.GetList(c => true);
+
+        //        Ventas ventas = new Ventas();
+        //        var combos = repositorio.Buscar(lista[index].ComboId);
+
+        //        if (CarritodeCombosGridView.Rows.Count != 0)
+        //        {
+        //            ventas.DetalleCombo = (List<CombosDetalle>)ViewState["CombosDetalle"];
+        //        }
+
+        //        ventas.DetalleCombo.Add(new CombosDetalle(combos.NombreCombo, combos.PrecioTotalCombo));
+
+        //        Decimal.TryParse(TotalTextBox.Text, out decimal calculo);
+        //        calculo = calculo + combos.PrecioTotalCombo;
+        //        TotalTextBox.Text = calculo.ToString();
+
+        //        ViewState["CombosDetalle"] = ventas.DetalleCombo;
+        //        CarritodeCombosGridView.DataSource = ViewState["CombosDetalle"];
+        //        CarritodeCombosGridView.DataBind();
+        //    }
         //}
 
-        //private void Invisible()
+        //Refescando el grid con los combos agregados
+        //protected void CarritodeCombosGridView_PageIndexChanged(object sender, EventArgs e)
         //{
-        //    TextBoxTotal.Visible = false;
-        //    ButtonNuevo.Visible = false;
-        //    ButtonGuardar.Visible = false;
-        //    ButtonEliminar.Visible = false;
+        //    CarritodeCombosGridView.DataSource = ViewState["CombosDetalle"];
+        //    CarritodeCombosGridView.DataBind();
         //}
+        //Refescando el grid con los productos agregados
+
+
+
+        protected void CarritodeProductosGridView_PageIndexChanged(object sender, EventArgs e)
+        {
+            CarritodeProductosGridView.DataSource = ViewState["VentaProductosDetalle"];
+            CarritodeProductosGridView.DataBind();
+        }
+
+        //protected void CarritodeCombosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        //{
+        //    //Removiendo combo y restando el precio del combo removido
+        //    if (e.CommandName == "Select")
+        //    {
+        //        int index = Convert.ToInt32(e.CommandArgument);
+        //        //List<VentaProductosDetalle> detalle2 = new List<VentaProductosDetalle>();
+        //        Expression<Func<Combos, bool>> filtro = p => true;
+        //        RepositorioBase<Combos> repositorio = new RepositorioBase<Combos>();
+        //        var lista = repositorio.GetList(c => true);
+        //        var combos = repositorio.Buscar(lista[index].ComboId);
+        //        decimal Total = 0;
+        //        Total = Convert.ToDecimal(TotalTextBox.Text);
+        //        Total -= combos.PrecioTotalCombo;
+        //        TotalTextBox.Text = Total.ToString();
+        //        ((List<CombosDetalle>)ViewState["CombosDetalle"]).RemoveAt(index);
+        //        CarritodeCombosGridView.DataSource = ViewState["CombosDetalle"];
+        //        CarritodeCombosGridView.DataBind();
+        //    }
+        //}
+
+        protected void CarritodeProductosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            //Removiendo Producto y restando el precio del producto removido
+            if (e.CommandName == "Select")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                //List<VentaProductosDetalle> detalle = new List<VentaProductosDetalle>();
+                //List<CombosDetalle> detalle2 = new List<CombosDetalle>();
+                Expression<Func<Productos, bool>> filtro = p => true;
+                RepositorioBase<Productos> repositorio = new RepositorioBase<Productos>();
+                var lista = repositorio.GetList(c => true);
+                var productos = repositorio.Buscar(lista[index].ProductoId);
+                decimal Total = 0;
+                Total = Convert.ToDecimal(TotalTextBox.Text);
+                Total -= productos.Precio;
+                TotalTextBox.Text = Total.ToString();
+                ((List<VentaProductosDetalle>)ViewState["VentaProductosDetalle"]).RemoveAt(index);
+                CarritodeProductosGridView.DataSource = ViewState["VentaProductosDetalle"];
+                CarritodeProductosGridView.DataBind();
+            }
+        }
+        //Refescando el grid con los productos eliminados
+        //protected void CarritodeProductosGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        //{
+        //    CarritodeProductosGridView.DataSource = ViewState["VentaProductosDetalle"];
+        //    CarritodeProductosGridView.PageIndex = e.NewPageIndex;
+        //    CarritodeProductosGridView.DataBind();
+        //}
+
+
+        //Refescando el grid con los combos eliminados
+        //protected void CarritodeCombosGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        //{
+        //    CarritodeCombosGridView.DataSource = ViewState["CombosDetalle"];
+        //    CarritodeCombosGridView.PageIndex = e.NewPageIndex;
+        //    CarritodeCombosGridView.DataBind();
+        //}
+
+
     }
 }

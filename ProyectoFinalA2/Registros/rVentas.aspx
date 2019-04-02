@@ -13,145 +13,149 @@
 
         <hr style="color: #358CCE" />
 
-        <label for="TextBoxArticuloID">ID</label>
-        <div class="form-row">
-            <div class="form-group col-lg-1">
-                <asp:TextBox TextMode="Number" class="form-control" ID="TextBoxFacturaID" runat="server" placeholder="ID"></asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="id" SetFocusOnError="true" ForeColor="Red" ID="RequiredFieldValidator7" ControlToValidate="TextBoxFacturaID" runat="server" Display="Dynamic" ErrorMessage="id"></asp:RequiredFieldValidator>
-            </div>
-            
-        </div>
-
-        
-        <div class="row">
-            <div class="form-group col-md-5 col-md-offset-3">
-                <label for="TextBoxFecha">Fecha</label>
-                <asp:TextBox TextMode="Date" class="form-control" ID="TextBoxFecha" runat="server" placeholder="Fecha de Registro del Usuario"></asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator3" ControlToValidate="TextBoxFecha" runat="server" Display="Dynamic" ErrorMessage="Introduzca la Fecha de venta"></asp:RequiredFieldValidator>
-            </div>
-        </div>
-
-        <fieldset>
-            <legend>Cliente</legend>
-
-            <label for="TextBoxClienteID">Cliente ID</label>
-            <div class="form-row">
-                <div class="form-row">
-                    <div class="form-group col-lg-3">
-                        <asp:TextBox TextMode="Number" class="form-control" ID="TextBoxClienteID" runat="server" placeholder="ID"></asp:TextBox>
-                        <asp:RequiredFieldValidator ValidationGroup="id_c" SetFocusOnError="true" ForeColor="Red" ID="RequiredFieldValidator1" ControlToValidate="TextBoxClienteID" runat="server" Display="Dynamic" ErrorMessage="Introduzca un id"></asp:RequiredFieldValidator>
+         <div class="panel-body">
+        <div class="form-horizontal col-md-12" role="form">
+            <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                <ContentTemplate>
+                    <div style="text-align:right">
+                        <asp:Button ID="Carrito" runat="server" CausesValidation="false" Text="Orden" class="btn btn-success btn-md" data-toggle="modal" data-target=".bd-example-modal-lg" />
                     </div>
-                    <div class="btn-group-col-md-1">
-                        <asp:Button class="btn btn-primary" ValidationGroup="id_c" ID="ButtonBuscarCliente" runat="server" Text="Buscar" OnClick="ButtonBuscarCliente_Click" />
-                    </div>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="Carrito" />
+                </Triggers>
+            </asp:UpdatePanel>
+            <div class="form-group">
+                <div class="col-sm-2" style="margin-left: 200px">
+                    <asp:TextBox ID="CriterioTextBox" runat="server" class="form-control input-sm" Style="font-size: medium" PlaceHolder="Productos" TextMode="Search"></asp:TextBox>
                 </div>
-                <div class="form-group col-md-3 col-md-offset-3">
-                    <label for="TextBoxNombreCliente">Nombre</label>
-                    <asp:TextBox class="form-control" ID="TextBoxNombreCliente" runat="server" autocomplete="off" ReadOnly="true"> </asp:TextBox>
+                <div class="col-sm-1">
+                    <asp:Button ID="BuscarButton" runat="server" Text="Buscar" class="btn btn-info btn-sm" />
                 </div>
-                 <div class="form-group col-md-3 col-md-offset-3">
-                    <label for="TextBoxComentario">Comentario</label>
-                    <asp:TextBox class="form-control" ID="TextBoxComentario" runat="server" autocomplete="off" ReadOnly="true"> </asp:TextBox>
+                <div class="col-sm-2" style="margin-left: 100px">
+                    <asp:TextBox ID="Criterio2TextBox" runat="server" class="form-control input-sm" Style="font-size: medium" PlaceHolder="Combos" TextMode="Search"></asp:TextBox>
                 </div>
-                
-            </div>
-            <div class="form-row">
-                <div class="form-row">
-                    <div class="form-group col-lg-3" style="margin-left: 272px;">
-                    </div>
-                    <div class="btn-group-col-md-1">
-                    </div>
+                <div class="col-sm-1">
+                    <asp:Button ID="Button1" runat="server" Text="Buscar" class="btn btn-info btn-sm" />
                 </div>
-                
-                
-            </div>
-
-        </fieldset>
-        <br />
-        <br />
-        <fieldset>
-            <legend>Articulos</legend>
-
-            <label for="TextBoxArticuloID">Articulo ID</label>
-            <div class="form-row">
-                <div class="form-row">
-                    <div class="form-group col-lg-3">
-                        <asp:TextBox TextMode="Number" class="form-control" ID="TextboxArticuloID" text="0" runat="server" placeholder="ID" OnTextChanged="TextboxArticuloID_TextChanged"></asp:TextBox>
-                        <asp:RequiredFieldValidator ValidationGroup="id_c" SetFocusOnError="true" ForeColor="Red" ID="RequiredFieldValidator2" ControlToValidate="TextboxArticuloID" runat="server" Display="Dynamic" ErrorMessage="Introduzca un id"></asp:RequiredFieldValidator>
-                    </div>
-               </div>
-                <div class="form-group col-md-3 col-md-offset-3">
-                    <label for="TextBoxNombreArticulo">NombreArticulo</label>
-                    <asp:TextBox class="form-control" ID="TextBoxNombreArticulo" runat="server" autocomplete="off" ReadOnly="true"> </asp:TextBox>
+                <br />
+                <br />
+                <div class="col-lg-12" style="margin-left: 160px">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <%--Productos--%>
+                            <div class="table-responsive">
+                                <asp:GridView ID="ProductosGridView" runat="server" class="table table-condensed table-responsive col-lg-6" CellPadding="6" ForeColor="#333333" GridLines="None" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" ControlStyle-Width="300px" Width="300px" OnRowCommand="ProductosGridView_RowCommand">
+                                    <AlternatingRowStyle BackColor="White" />
+                                    <Columns>
+                                        <asp:TemplateField ShowHeader="False" HeaderText="Opciones">
+                                            <ItemTemplate>
+                                                <img src="/Resources/ImgProductos/Producto.png" width="70" height="70" style="margin-left: 19px" />
+                                                <asp:Button ID="AgregarOrdenProductos" runat="server" CausesValidation="false" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).DataItemIndex %>"
+                                                    Text="Agregar a la orden" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="NombreProducto" HeaderText="NombreProducto" SortExpression="NombreProducto" />
+                                        <asp:BoundField DataField="Precio" HeaderText="Precio" SortExpression="Precio" />
+                                    </Columns>
+                                    <HeaderStyle BackColor="#FF9021" Font-Bold="true" ForeColor="White" />
+                                </asp:GridView>
+                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ConStr %>" SelectCommand="SELECT [NombreProducto], [Precio] FROM [Productos]"></asp:SqlDataSource>
+                               
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="ProductosGridView" />
+                            
+                        </Triggers>
+                    </asp:UpdatePanel>
                 </div>
-                <div class="form-group col-md-3 col-md-offset-4">
-                    <label for="TextBoxPrecioArticulo">Precio</label>
-                    <asp:TextBox class="form-control" ID="TextBoxPrecioArticulo" ReadOnly="true" runat="server" autocomplete="off"> </asp:TextBox>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-row">
-                    <div class="form-group col-lg-3" style="margin-left: 272px;">
-                    </div>
-                    <div class="btn-group-col-md-1">
-                    </div>
-                </div>
-
-                <div class="form-group col-md-3 col-md-offset-4">
-                    <label for="TextBoxCantidadArticulo">Cantidad</label>
-                    <asp:TextBox class="form-control" TextMode="Number" ID="TextBoxCantidadArticulo" runat="server" autocomplete="off" OnTextChanged="TextBoxCantidadArticulo_TextChanged"> </asp:TextBox>
-                </div>
-                <div class="form-group col-md-3 col-md-offset-4">
-                    <label for="TextBoxImporteArticulo">Importe</label>
-                    <asp:TextBox class="form-control" ID="TextBoxImporteArticulo" runat="server" autocomplete="off" ReadOnly="true"> </asp:TextBox>
-                </div>
-            </div>
-
-            <div class="btn-block text-center">
-                <asp:Button class="btn btn-primary" ValidationGroup="add" ID="ButtonAgregar" runat="server" Text="ADD" OnClick="ButtonAgregar_Click" />
-            </div>
-
-            <div class="row justify-content-center mt-3">
-                <div class="col-lg-11">
-                    <asp:GridView ID="FacturaGridView" runat="server" AllowPaging="true" PageSize="7" CssClass="table table-striped table-hover table-responsive-lg" AutoGenerateColumns="False">
-                        <HeaderStyle BackColor="#337ab7" Font-Bold="True" ForeColor="White" />
-                        <Columns>
-                            <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                            <asp:BoundField DataField="NombreArticulo" HeaderText="Nombre del Articulo" />
-                            <asp:BoundField DataField="Precio" HeaderText="Precio" />
-                            <asp:BoundField DataField="Importe" HeaderText="Importe" />
-                        </Columns>
-                    </asp:GridView>
-                </div>
-            </div>
-        </fieldset>
-
-        <div class="form-row">
-            <div class="form-group col-md-3 " style="margin-left:350px;">
-                <label for="TextBoxTotal">Total</label>
-                <asp:TextBox class="form-control" ReadOnly="true" ID="TextBoxTotal" runat="server" autocomplete="off"> </asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator6" ControlToValidate="TextBoxTotal" runat="server" Display="Dynamic" ErrorMessage="Total"></asp:RequiredFieldValidator>
-            </div>
-
-           <div class="form-group col-md-3 " style="margin-left:350px;">
-                <label for="TextBoxEfectivo">EfectivoRecibido</label>
-                <asp:TextBox class="form-control" ReadOnly="true" ID="TextBoxEfectivo" runat="server" autocomplete="off"> </asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator5" ControlToValidate="TextBoxEfectivo" runat="server" Display="Dynamic" ErrorMessage="EfectivoRecibido"></asp:RequiredFieldValidator>
-            </div>
-
-            <div class="form-group col-md-3 " style="margin-left:350px;">
-                <label for="TextBoxDevuelta">Devuelta</label>
-                <asp:TextBox class="form-control" ReadOnly="true" ID="TextBoxDevuelta" runat="server" autocomplete="off"> </asp:TextBox>
-                <asp:RequiredFieldValidator ValidationGroup="save" ForeColor="Red" ID="RequiredFieldValidator4" ControlToValidate="TextBoxDevuelta" runat="server" Display="Dynamic" ErrorMessage="Devuelta"></asp:RequiredFieldValidator>
             </div>
         </div>
-
-        <div class="btn-block text-center" >
-            <asp:Button class="btn btn-primary" ID="ButtonNuevo" runat="server" Text="Nuevo" OnClick="ButtonNuevo_Click" />
-            <asp:Button class="btn btn-success" ValidationGroup="save" ID="ButtonGuardar" runat="server" Text="Guardar" OnClick="ButtonGuardar_Click" />
-            <asp:Button class="btn btn-danger" ValidationGroup="id_f" ID="ButtonEliminar" runat="server" Text="Eliminar" OnClick="ButtonEliminar_Click" />
+        <%--Fecha--%>
+        <div class="form-group">
+            <div class="col-md-6">
+                <asp:TextBox ID="FechaTextBox" TextMode="Date" runat="server" class="form-control input-sm" Style="font-size: medium" Visible="false"></asp:TextBox>
+            </div>
         </div>
     </div>
 
+    <!--Modal de confirmacion de eliminar-->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document" style="max-width: 800px!important; min-width: 800px!important">
+            <div class="modal-content ">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title">Orden</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <%--Cuerpo de la compra de productos--%>
+                    <div class="panel-body">
+                        <div class="form-horizontal col-md-12" role="form">
+                            <div class="table-responsive">
+                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                    <ContentTemplate>
+                                        <asp:GridView ID="CarritodeProductosGridView" runat="server" class="table table-condensed table-responsive col-lg-6" CellPadding="6" ForeColor="#333333" GridLines="None" ControlStyle-Width="300px" Width="300px" OnPageIndexChanged="CarritodeProductosGridView_PageIndexChanged" OnRowCommand="CarritodeProductosGridView_RowCommand" OnPageIndexChanging="CarritodeProductosGridView_PageIndexChanging">
+                                            <AlternatingRowStyle BackColor="White" />
+                                            <Columns>
+                                                <asp:TemplateField ShowHeader="False" HeaderText="Opciones">
+                                                    <ItemTemplate>
+                                                        <asp:Button ID="RemoverProductos" runat="server" CausesValidation="false" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).DataItemIndex %>"
+                                                            Text="X" class="btn btn-danger btn-sm" />
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                            </Columns>
+                                            <HeaderStyle BackColor="#FF9021" Font-Bold="true" ForeColor="White" />
+                                        </asp:GridView>
+                                        
+                                    </ContentTemplate>
+                                    <Triggers>
+                                        <asp:AsyncPostBackTrigger ControlID="CarritodeProductosGridView" />
+                                        
+                                    </Triggers>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                    </div>
+                    <%--Entradas--%>
+                    <div class="panel-body">
+                        <div class="form-horizontal col-sm-12" role="form">
+                            <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                <ContentTemplate>
+                                    <div class="form-group" style="margin-left: 50px">
+                                        <label for="TotalTextBox" class="col-sm-1 control-label input-sm" style="font-size: medium">Total</label>
+                                        <div class="col-sm-2">
+                                            <asp:TextBox ID="TotalTextBox" runat="server" placeholder="0" class="form-control input-sm" Style="font-size: medium" TextMode="Number" ReadOnly="true"></asp:TextBox>
+                                        </div>
+
+                                        <label for="EfectivoTextBox" class="col-sm-2 control-label input-sm" style="font-size: medium">Efectivo</label>
+                                        <div class="col-sm-2">
+                                            <asp:TextBox ID="EfectivoTextBox" runat="server" placeholder="0" class="form-control input-sm" Style="font-size: medium" TextMode="Number" OnTextChanged="EfectivoTextBox_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                        </div>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="EfectivoTextBox" ValidationExpression="^[0-9]*" Text="*" ForeColor="Red" Display="Dynamic" ToolTip="Entrada no valida" ValidationGroup="Pagar"></asp:RegularExpressionValidator>
+                                        <label for="DevueltaTextBox" class="col-sm-2 control-label input-sm" style="font-size: medium">Devuelta</label>
+                                        <div class="col-sm-2">
+                                            <asp:TextBox ID="DevueltaTextBox" runat="server" placeholder="0" class="form-control input-sm" Style="font-size: medium" TextMode="Number" ReadOnly="true"></asp:TextBox>
+                                        </div>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="DevueltaTextBox" ValidationExpression="^[0.00-9.00]*" Text="*" ForeColor="Red" Display="Dynamic" ToolTip="Entrada no valida" ValidationGroup="Pagar"></asp:RegularExpressionValidator>
+                                    </div>
+                                    </div>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="TotalTextBox" />
+                                    <asp:AsyncPostBackTrigger ControlID="DevueltaTextBox" />
+                                </Triggers>
+                            </asp:UpdatePanel>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <asp:Button runat="server" class="btn btn-secondary" data-dismiss="modal" Text="Cerrar" />
+                        <asp:Button runat="server" ID="Pagar" class="btn btn-success" ValidationGroup="Pagar" Text="Pagar" OnClick="Pagar_Click" />
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
 </asp:Content>
